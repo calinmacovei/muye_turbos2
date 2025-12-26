@@ -2394,7 +2394,7 @@
 			"backPressureCoef": 0.000011,
 			"pressureRatePSI": 60,
 			"frictionCoef": 25.0,
-			"inertia":26.50,
+			"inertia":20.0,
 			"damageThresholdTemperature": 900,
 			"pressurePSI":[
 				//turbineRPM, pressure(PSI)
@@ -2439,22 +2439,31 @@
 	
 		"controller": [
 			["fileName"],
-			["turboGlow", {"turboStartGlow":300,"turboGlowTemp":350,"tempEndGlow":2100,"turboGlowValue":[1,2,3], "maxGlow":0.2}]
+			["turboGlow", {"turboStartGlow":300,"turboGlowTemp":350,"tempEndGlow":2100,"turboGlowValue":[1,2,3], "maxGlow":0.2}],
+			["turbothrust", {}]
 		],
 
 		"flexbodies": [
 			["mesh", "[group]:", "nonFlexMaterials"],
-			["pigeon_na_header_t_mu", ["pigeon_engine","pigeon_t_mu"]]
+			["pigeon_na_header_t_mu", ["pigeon_engine","pigeon_t_mu"]],
 			["pigeon_carb_l_t_mu", ["pigeon_manifold","pigeon_t_mu"]],
 
 			["pigeon_turbo_xxxl_t_mu", "pigeon_t_mu"]
 
 		],
 
+
 		"variables": [
 			["name", "type",		"unit",	"category", "default", "min", "max", "title", "description"],
 			["$fake_weight", "range", "X", "Engine",			1,		0.05,	2.0, "Turbo Weight", "Multiply the Weight"]
 		],
+
+		"thrusters": [
+			["id1:", "id2:", "factor", "thrustLimit", "control"],
+			["turboin","turboexh", 4500, 400000, "jetThrust"]
+		],
+
+
 
 		"nodes": [
 			["id", "posX", "posY", "posZ"],
