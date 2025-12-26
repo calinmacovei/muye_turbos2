@@ -1,0 +1,107 @@
+{
+"pigeon_i3_radiator_super_t_mu": {
+    "information":{
+        "authors":"fillman86",
+        "name":"Super Turbo I3 Radiator Fantastic Fun Time",
+        "value":250,
+    },
+    "slotType" : "pigeon_i3_radiator",
+    "flexbodies": [
+         ["mesh", "[group]:", "nonFlexMaterials"],
+         ["pigeon_rad_t_mu", ["pigeon_radiator"]],
+         ["pigeon_rad_bracket_t_mu", ["pigeon_radiator"]],
+         {"deformGroup":"radtube_break", "deformMaterialBase":"pigeon", "deformMaterialDamaged":"invis"},
+         ["pigeon_radtube_t_mu", ["pigeon_engine","pigeon_radiator"]],
+         {"deformGroup":""},
+    ],
+    "props": [
+        ["func",            "mesh",               "idRef:", "idX:", "idY:", "baseRotation",        "rotation",            "translation",         "min", "max", "offset", "multiplier"],
+        ["radiatorFanSpin", "pigeon_radiatorfan", "rs2r",   "rs2l", "rs1r", {"x":10, "y":0, "z":180}, {"x":0, "y":1, "z":0}, {"x":0, "y":0, "z":0}, -360,  360,   0,        1 {"baseTranslationGlobal":{"x":0.107, "y":-1.211, "z":0.676},"deformGroup":["radiator_damage"]}],
+        ["radiatorFanSpin", "pigeon_radiatorfan", "rs2r",   "rs2l", "rs1r", {"x":10, "y":0, "z":180}, {"x":0, "y":1, "z":0}, {"x":0, "y":0, "z":0}, -360,  360,   0,        1 {"baseTranslationGlobal":{"x":-0.09, "y":-1.211, "z":0.676},"deformGroup":["radiator_damage"]}],
+    ],
+    "mainEngine":{
+        "radiatorArea":1.2,
+        "radiatorEffectiveness":18000,
+        "coolantVolume":5.0,
+        "radiatorFanType":"electric",
+        "radiatorFanTemperature":100,
+        "radiatorFanMaxAirSpeed":13.6,
+        "thermostatTemperature":90,
+        "radiatorFanLoopEvent": "event:>Vehicle>Cooling Fan>Electric_05",
+        "radiatorFanVolume": 1.5,
+
+        //damage deformGroups
+        "deformGroups_radiator":["radiator_damage", "radhose_damage"],
+        },
+    "nodes": [
+         ["id", "posX", "posY", "posZ"],
+         {"selfCollision":true},
+         {"collision":true},
+         {"frictionCoef":0.5},
+         {"nodeMaterial":"|NM_METAL"},
+
+         //radiator
+         {"group":"pigeon_radiator"},
+         {"engineGroup":"radiator"},
+         {"nodeWeight":0.6},
+         {"chemEnergy":200,"burnRate":0.4,"flashPoint":250,"specHeat":0.8,"smokePoint":150,"selfIgnitionCoef":false},
+         ["rad1",0.0,-1.258,0.4588],
+         {"chemEnergy":false,"burnRate":false,"flashPoint":false,"specHeat":false,"smokePoint":false,"selfIgnitionCoef":false},
+         ["rad2",0.0,-1.258,0.78],
+         {"engineGroup":""},
+
+         //radiator support
+         {"nodeWeight":1.5},
+         {"group":["pigeon_frame", "pigeon_radiator"]},
+         ["rs2r",-0.214,-1.239,0.78],
+         ["rs2l", 0.214,-1.239,0.78],
+         ["rs3", 0.0,-1.05,0.67, {"group":"", "selfCollision":false, "collision":false}],
+         {"group":""},
+    ],
+    "beams": [
+          ["id1:", "id2:"],
+          {"beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+          {"beamSpring":501000,"beamDamp":50},
+          {"beamDeform":8000,"beamStrength":"FLT_MAX"},
+
+          //radiator
+          {"deformGroup":"radiator_damage","deformationTriggerRatio":0.01},
+          {"deformLimitExpansion":1.2},
+          ["rad2", "rs2r"],
+          ["rad2", "rs2l"],
+          ["rad2", "rs1r"],
+          ["rad2", "rs1l"],
+          ["rad2", "rs3"],
+          ["rad1", "rs2r"],
+          ["rad1", "rs2l"],
+          ["rad1", "rs1r"],
+          ["rad1", "rs1l"],
+          ["rad1", "rs3"],
+          ["rad1", "rad2"],
+
+          //radhose break
+          {"beamSpring":11000,"beamDamp":10},
+          {"beamDeform":1000,"beamStrength":15000},
+          {"deformGroup":"radtube_break","deformationTriggerRatio":0.1},
+          {"breakGroup":"radtube"}
+          ["e4r","rs2r"],
+          ["e2r","rs2r"],
+          ["e4l","rs1l"],
+          ["e2l","rs1l"],
+          {"breakGroup":""}
+          {"deformGroup":"", "deformationTriggerRatio":""},
+          {"optional":false},
+          {"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+    ],
+    "triangles":[
+        ["id1:", "id2:", "id3:"],
+        {"groundModel":"metal"},
+        {"dragCoef":0},
+        {"group":"pigeon_radiator"},
+        ["rs2r", "rs1r", "rad1"],
+        ["rad1", "rad2", "rs2r"],
+        ["rad2", "rad1", "rs2l"],
+        ["rs2l", "rad1", "rs1l"],
+        ],
+}
+}

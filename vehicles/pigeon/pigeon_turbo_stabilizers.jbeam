@@ -1,0 +1,707 @@
+{
+	"pigeon_stabilizer_turbo_long": {
+		"information":{
+			"authors":"fillman86",
+			"name":"Long Turbo Stabilizer",
+			"value":1450
+		},
+
+		"slotType" : "pigeon_stabilizer_turbo"
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["pigeon_stabilizer_L_t_mu_l", ["pigeon_stabilizer_L_t_mu"]],
+			["pigeon_stabwheel_L_t_mu_l", ["stabwheel_L_t_mu"]],
+			["pigeon_stabilizer_R_t_mu_l", ["pigeon_stabilizer_R_t_mu"]],
+			["pigeon_stabwheel_R_t_mu_l", ["stabwheel_R_t_mu"]]
+		],
+
+		"powertrain" : [
+			["type", "name", "inputName", "inputIndex"],
+			["shaft", "stabilizertR", "", 1, {"connectedWheel":"STTR", "breakTriggerBeam":"stab_t_R", "friction":0.1}],
+			["shaft", "stabilizertL", "", 1, {"connectedWheel":"STTL", "breakTriggerBeam":"stab_t_L", "friction":0.1}]
+		],
+
+		"nodes": [
+			["id", "posX", "posY", "posZ"],
+			//--STABILIZER--
+			{"collision":true},
+			{"selfCollision":true},
+			{"nodeWeight":4},
+			{"frictionCoef":0.5},
+			{"nodeMaterial":"|NM_METAL"},
+			{"group":"pigeon_stabilizer_R_t_mu"},
+			//main brackets
+			["sttu1r",-0.469, 2.48, 1.2383],
+			["sttu2r",-0.4786, 2.55, 1.2355],
+			["sttu3r",-0.4838, 2.52, 1.3069],
+	
+			["sttu4r",-0.2436, 2.48, 0.9255],
+			["sttu5r",-0.2502, 2.55, 0.9179],
+			["sttu6r",-0.183, 2.52, 0.8733],
+	
+			//tube
+			["stta1r",-0.601, 2.52, 0.7521],
+			["stta2r",-0.9309, 2.48, 0.2261],
+	
+			//wheel hub axis
+			{"group":["pigeon_stabilizer_R_t_mu","stabwheel_R_t_mu"]},
+			["sttw1r",-0.9125, 2.514, 0.1575],
+			["sttw1rr",-1.0175, 2.514, 0.1425],
+	
+			//Left Side
+			{"group":"pigeon_stabilizer_L_t_mu"},
+			//main brackets
+			["sttu1l", 0.4569, 2.48, 1.2349],
+			["sttu2l", 0.4665, 2.55, 1.2322],
+			["sttu3l", 0.4705, 2.52, 1.3037],
+	
+			["sttu4l", 0.2348, 2.48, 0.9289],
+			["sttu5l", 0.2419, 2.55, 0.9219],
+			["sttu6l", 0.1784, 2.52, 0.8722],
+	
+			//tube
+			["stta1l", 0.5889, 2.52, 0.7499],
+			["stta2l", 0.9309, 2.48, 0.2261],
+	
+			//wheel hub axis
+			{"group":["pigeon_stabilizer_L_t_mu","stabwheel_L_t_mu"]},
+			["sttw1l", 0.9125, 2.514, 0.1575],
+			["sttw1ll", 1.0175, 2.514, 0.1425],
+			{"group":""},
+		],
+
+		"beams": [
+			["id1:", "id2:"],
+			//--STABILIZER--
+			{"beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			{"beamSpring":1551000,"beamDamp":120},
+			{"beamDeform":40000,"beamStrength":"FLT_MAX"},
+			//brackets
+			["sttu1l","sttu2l"],
+			["sttu2l","sttu3l"],
+			["sttu3l","sttu1l"],
+	
+			["sttu4l","sttu5l"],
+			["sttu5l","sttu6l"],
+			["sttu6l","sttu4l"],
+	
+			//tube
+			{"beamDeform":30000,"beamStrength":"FLT_MAX"},
+			["sttu1l","stta1l"],
+			["sttu2l","stta1l"],
+			["sttu3l","stta1l"],
+	
+			["sttu1l","stta2l"],
+			["sttu2l","stta2l"],
+			["sttu3l","stta2l"],
+	
+			["stta1l","stta2l"],
+	
+			["sttu4l","stta1l"],
+			["sttu5l","stta1l"],
+			["sttu6l","stta1l"],
+	
+			["sttu4l","stta2l"],
+			["sttu5l","stta2l"],
+			["sttu6l","stta2l"],
+	
+			//hub
+			{"beamDeform":16000,"beamStrength":"FLT_MAX"},
+			["stta2l","sttw1l", {"name":"stab_t_L"}],
+			["stta2l","sttw1ll"],
+			["sttw1l","sttw1ll"],
+	
+			["sttw1l","sttu4l"],
+			["sttw1l","sttu5l"],
+			["sttw1l","sttu6l"],
+	
+			["sttw1ll","sttu4l"],
+			["sttw1ll","sttu5l"],
+			["sttw1ll","sttu6l"],
+	
+			["sttw1l","sttu1l"],
+			["sttw1l","sttu2l"],
+			["sttw1l","sttu3l"],
+	
+			["sttw1ll","sttu1l"],
+			["sttw1ll","sttu2l"],
+			["sttw1ll","sttu3l"],
+	
+			["sttw1ll","stta1l"],
+	
+			//attach
+			{"beamDeform":8500,"beamStrength":17000},
+			{"beamSpring":301000,"beamDamp":60},
+			{"breakGroup":"stabilizer_L_a"},
+			["sttu1l", "turbo3l"],
+			["sttu1l", "turbo1l"],
+			["sttu1l", "turbo6l"],
+			["sttu1l", "turbo4l"],
+	
+			["sttu2l", "turbo3l"],
+			["sttu2l", "turbo1l"],
+			["sttu2l", "turbo6l"],
+			["sttu2l", "turbo4l"],
+	
+			["sttu3l", "turbo3l"],
+			["sttu3l", "turbo1l"],
+			["sttu3l", "turbo6l"],
+			["sttu3l", "turbo4l"],
+	
+			["stta1l", "turbo3l"],
+			["stta1l", "turbo1l"],
+			["stta1l", "turbo6l"],
+			["stta1l", "turbo4l"],
+			
+			["stta1l", "turbo2l"],
+			["stta2l", "turbo2l"],
+
+			["sttw1l", "turbo2l"],
+			["sttw1ll", "turbo2l"],
+
+			{"beamSpring":0,"beamDamp":50},
+			["sttw1ll", "turbo1l"],
+			["sttw1ll", "turbo4l"],
+	
+			{"breakGroup":"stabilizer_L_b"},
+			{"beamSpring":301000,"beamDamp":50},
+			["sttu4l", "turbo6l"],
+			["sttu4l", "turbo3l"],
+			["sttu4l", "turbo1l"],
+			["sttu4l", "turbo4l"],
+	
+			["sttu5l", "turbo6l"],
+			["sttu5l", "turbo3l"],
+			["sttu5l", "turbo1l"],
+			["sttu5l", "turbo4l"],
+	
+			["sttu6l", "turbo6l"],
+			["sttu6l", "turbo3l"],
+			["sttu6l", "turbo1l"],
+			["sttu6l", "turbo4l"],
+	
+			["sttu5l", "turboexh"],
+			["sttu4l", "turboexh"],
+			{"beamSpring":0,"beamDamp":50},
+			["sttw1ll", "turbo1l"],
+			["sttw1ll", "turbo3l"],
+			{"breakGroup":""},
+			{"beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			//--STABILIZER--
+			{"beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			{"beamSpring":171000,"beamDamp":120},
+			{"beamDeform":40000,"beamStrength":"FLT_MAX"},
+			//brackets
+			["sttu1r","sttu2r"],
+			["sttu2r","sttu3r"],
+			["sttu3r","sttu1r"],
+	
+			["sttu4r","sttu5r"],
+			["sttu5r","sttu6r"],
+			["sttu6r","sttu4r"],
+	
+			//tube
+			{"beamDeform":30000,"beamStrength":"FLT_MAX"},
+			["sttu1r","stta1r"],
+			["sttu2r","stta1r"],
+			["sttu3r","stta1r"],
+	
+			["sttu1r","stta2r"],
+			["sttu2r","stta2r"],
+			["sttu3r","stta2r"],
+	
+			["stta1r","stta2r"],
+	
+			["sttu4r","stta1r"],
+			["sttu5r","stta1r"],
+			["sttu6r","stta1r"],
+	
+			["sttu4r","stta2r"],
+			["sttu5r","stta2r"],
+			["sttu6r","stta2r"],
+	
+			//hub
+			{"beamDeform":16000,"beamStrength":"FLT_MAX"},
+			["stta2r","sttw1r", {"name":"stab_t_R"}],
+			["stta2r","sttw1rr"],
+			["sttw1r","sttw1rr"],
+	
+			["sttw1r","sttu4r"],
+			["sttw1r","sttu5r"],
+			["sttw1r","sttu6r"],
+	
+			["sttw1rr","sttu4r"],
+			["sttw1rr","sttu5r"],
+			["sttw1rr","sttu6r"],
+	
+			["sttw1r","sttu1r"],
+			["sttw1r","sttu2r"],
+			["sttw1r","sttu3r"],
+	
+			["sttw1rr","sttu1r"],
+			["sttw1rr","sttu2r"],
+			["sttw1rr","sttu3r"],
+	
+			["sttw1rr","stta1r"],
+	
+			//attach
+			{"beamDeform":1700,"beamStrength":27000},
+			{"beamSpring":301000,"beamDamp":60},
+			{"breakGroup":"stabilizer_R_a"},
+			["sttu1r", "turbo3r"],
+			["sttu1r", "turbo1r"],
+			["sttu1r", "turbo6r"],
+			["sttu1r", "turbo4r"],
+	
+			["sttu2r", "turbo3r"],
+			["sttu2r", "turbo1r"],
+			["sttu2r", "turbo6r"],
+			["sttu2r", "turbo4r"],
+	
+			["sttu3r", "turbo3r"],
+			["sttu3r", "turbo1r"],
+			["sttu3r", "turbo6r"],
+			["sttu3r", "turbo4r"],
+	
+			["stta1r", "turbo3r"],
+			["stta1r", "turbo1r"],
+			["stta1r", "turbo6r"],
+			["stta1r", "turbo4r"],
+
+			["stta1r", "turbo2r"],
+			["stta2r", "turbo2r"],
+
+			["sttw1r", "turbo2r"],
+			["sttw1rr", "turbo2r"],
+
+			{"beamSpring":0,"beamDamp":50},
+			["sttw1rr", "turbo1r"],
+			["sttw1rr", "turbo4r"],
+	
+			{"breakGroup":"stabilizer_R_b"},
+			{"beamSpring":301000,"beamDamp":60},
+			["sttu4r", "turbo6r"],
+			["sttu4r", "turbo3r"],
+			["sttu4r", "turbo1r"],
+			["sttu4r", "turbo4r"],
+	
+			["sttu5r", "turbo6r"],
+			["sttu5r", "turbo3r"],
+			["sttu5r", "turbo1r"],
+			["sttu5r", "turbo4r"],
+	
+			["sttu6r", "turbo6r"],
+			["sttu6r", "turbo3r"],
+			["sttu6r", "turbo1r"],
+			["sttu6r", "turbo4r"],
+	
+			["sttu5r", "turboexh"],
+			["sttu4r", "turboexh"],
+			{"beamSpring":0,"beamDamp":50},
+			["sttw1rr", "turbo1r"],
+			["sttw1rr", "turbo3r"],
+			{"breakGroup":""},
+			{"beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+		],
+		"triangles": [
+				["id1:","id2:","id3:"],
+				//stabilizer
+				{"groundModel":"metal"},
+				{"group":"pigeon_stabilizer_R_t_mu"},
+				["sttu3r","sttu2r","sttu1r"],
+				["sttu4r","sttu6r","sttu5r"],
+	
+				{"group":"pigeon_stabilizer_L_t_mu"},
+				["sttu2l","sttu3l","sttu1l"],
+				["sttu4l","sttu5l","sttu6l"],
+				{"group":""},
+		],
+		"pressureWheels": [
+				["name","hubGroup","group","node1:","node2:","nodeS","nodeArm:","wheelDir"],
+	
+				//general settings
+				{"hubRadius":0.08},
+				{"wheelOffset":0.005},
+				{"hubWidth":0.025},
+				{"numRays":10},
+				{"hasTire":false},
+	
+				//hub options
+				{"hubBeamSpring":251000, "hubBeamDamp":5},
+				{"hubBeamDeform":40000, "hubBeamStrength":160000},
+				{"hubNodeWeight":0.1},
+				{"hubNodeMaterial":"|NM_RUBBER"},
+				{"hubFrictionCoef":0.8},
+	
+				//stabilizer wheel
+				{"propulsed":0},
+				{"brakeTorque":0},
+				{"parkingTorque":0},
+				{"selfCollision":true},
+				{"collision":true},
+				["STTR", "stabwheel_R_t_mu", "stabwheel_R_t_mu", "sttw1r", "sttw1rr", 9999, "stta1r", 1, {"speedo":false}],
+				["STTL", "stabwheel_L_t_mu", "stabwheel_L_t_mu","sttw1l", "sttw1ll", 9999, "stta1l", 1, {"speedo":false}],
+				{"propulsed":0},
+				{"hasTire":true}
+		]
+	}
+
+	"pigeon_stabilizer_turbo": {
+		"information":{
+			"authors":"fillman86",
+			"name":"Turbo Stabilizer",
+			"value":1450
+		},
+
+		"slotType" : "pigeon_stabilizer_turbo"
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["pigeon_stabilizer_L_t_mu", ["pigeon_stabilizer_L_t_mu"]],
+			["pigeon_stabwheel_L_t_mu", ["stabwheel_L_t_mu"]],
+			["pigeon_stabilizer_R_t_mu", ["pigeon_stabilizer_R_t_mu"]],
+			["pigeon_stabwheel_R_t_mu", ["stabwheel_R_t_mu"]]
+		],
+
+		"powertrain" : [
+			["type", "name", "inputName", "inputIndex"],
+			["shaft", "stabilizertR", "", 1, {"connectedWheel":"STTR", "breakTriggerBeam":"stab_t_R", "friction":0.1}],
+			["shaft", "stabilizertL", "", 1, {"connectedWheel":"STTL", "breakTriggerBeam":"stab_t_L", "friction":0.1}]
+		],
+
+		"nodes": [
+			["id", "posX", "posY", "posZ"],
+			//--STABILIZER--
+			{"collision":true},
+			{"selfCollision":true},
+			{"nodeWeight":4},
+			{"frictionCoef":0.5},
+			{"nodeMaterial":"|NM_METAL"},
+			{"group":"pigeon_stabilizer_R_t_mu"},
+			//main brackets
+			["sttu1r",-0.469, 2.48, 1.2383],
+			["sttu2r",-0.4786, 2.55, 1.2355],
+			["sttu3r",-0.4838, 2.52, 1.3069],
+	
+			["sttu4r",-0.2436, 2.48, 0.9255],
+			["sttu5r",-0.2502, 2.55, 0.9179],
+			["sttu6r",-0.183, 2.52, 0.8733],
+	
+			//tube
+			["stta1r",-0.601, 2.52, 0.7521],
+			["stta2r",-0.9309, 2.48, 0.4261],
+	
+			//wheel hub axis
+			{"group":["pigeon_stabilizer_R_t_mu","stabwheel_R_t_mu"]},
+			["sttw1r",-0.9125, 2.514, 0.3575],
+			["sttw1rr",-1.0175, 2.514, 0.3425],
+	
+			//Left Side
+			{"group":"pigeon_stabilizer_L_t_mu"},
+			//main brackets
+			["sttu1l", 0.4569, 2.48, 1.2349],
+			["sttu2l", 0.4665, 2.55, 1.2322],
+			["sttu3l", 0.4705, 2.52, 1.3037],
+	
+			["sttu4l", 0.2348, 2.48, 0.9289],
+			["sttu5l", 0.2419, 2.55, 0.9219],
+			["sttu6l", 0.1784, 2.52, 0.8722],
+	
+			//tube
+			["stta1l", 0.5889, 2.52, 0.7499],
+			["stta2l", 0.9309, 2.48, 0.4261],
+	
+			//wheel hub axis
+			{"group":["pigeon_stabilizer_L_t_mu","stabwheel_L_t_mu"]},
+			["sttw1l", 0.9125, 2.514, 0.3575],
+			["sttw1ll", 1.0175, 2.514, 0.3425],
+			{"group":""},
+		],
+
+		"beams": [
+			["id1:", "id2:"],
+			//--STABILIZER--
+			{"beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			{"beamSpring":1551000,"beamDamp":120},
+			{"beamDeform":40000,"beamStrength":"FLT_MAX"},
+			//brackets
+			["sttu1l","sttu2l"],
+			["sttu2l","sttu3l"],
+			["sttu3l","sttu1l"],
+	
+			["sttu4l","sttu5l"],
+			["sttu5l","sttu6l"],
+			["sttu6l","sttu4l"],
+	
+			//tube
+			{"beamDeform":30000,"beamStrength":"FLT_MAX"},
+			["sttu1l","stta1l"],
+			["sttu2l","stta1l"],
+			["sttu3l","stta1l"],
+	
+			["sttu1l","stta2l"],
+			["sttu2l","stta2l"],
+			["sttu3l","stta2l"],
+	
+			["stta1l","stta2l"],
+	
+			["sttu4l","stta1l"],
+			["sttu5l","stta1l"],
+			["sttu6l","stta1l"],
+	
+			["sttu4l","stta2l"],
+			["sttu5l","stta2l"],
+			["sttu6l","stta2l"],
+	
+			//hub
+			{"beamDeform":16000,"beamStrength":"FLT_MAX"},
+			["stta2l","sttw1l", {"name":"stab_t_L"}],
+			["stta2l","sttw1ll"],
+			["sttw1l","sttw1ll"],
+	
+			["sttw1l","sttu4l"],
+			["sttw1l","sttu5l"],
+			["sttw1l","sttu6l"],
+	
+			["sttw1ll","sttu4l"],
+			["sttw1ll","sttu5l"],
+			["sttw1ll","sttu6l"],
+	
+			["sttw1l","sttu1l"],
+			["sttw1l","sttu2l"],
+			["sttw1l","sttu3l"],
+	
+			["sttw1ll","sttu1l"],
+			["sttw1ll","sttu2l"],
+			["sttw1ll","sttu3l"],
+	
+			["sttw1ll","stta1l"],
+	
+			//attach
+			{"beamDeform":8500,"beamStrength":17000},
+			{"beamSpring":301000,"beamDamp":60},
+			{"breakGroup":"stabilizer_L_a"},
+			["sttu1l", "turbo3l"],
+			["sttu1l", "turbo1l"],
+			["sttu1l", "turbo6l"],
+			["sttu1l", "turbo4l"],
+	
+			["sttu2l", "turbo3l"],
+			["sttu2l", "turbo1l"],
+			["sttu2l", "turbo6l"],
+			["sttu2l", "turbo4l"],
+	
+			["sttu3l", "turbo3l"],
+			["sttu3l", "turbo1l"],
+			["sttu3l", "turbo6l"],
+			["sttu3l", "turbo4l"],
+	
+			["stta1l", "turbo3l"],
+			["stta1l", "turbo1l"],
+			["stta1l", "turbo6l"],
+			["stta1l", "turbo4l"],
+			
+			["stta1l", "turbo2l"],
+			["stta2l", "turbo2l"],
+
+			["sttw1l", "turbo2l"],
+			["sttw1ll", "turbo2l"],
+
+			{"beamSpring":0,"beamDamp":50},
+			["sttw1ll", "turbo1l"],
+			["sttw1ll", "turbo4l"],
+	
+			{"breakGroup":"stabilizer_L_b"},
+			{"beamSpring":301000,"beamDamp":50},
+			["sttu4l", "turbo6l"],
+			["sttu4l", "turbo3l"],
+			["sttu4l", "turbo1l"],
+			["sttu4l", "turbo4l"],
+	
+			["sttu5l", "turbo6l"],
+			["sttu5l", "turbo3l"],
+			["sttu5l", "turbo1l"],
+			["sttu5l", "turbo4l"],
+	
+			["sttu6l", "turbo6l"],
+			["sttu6l", "turbo3l"],
+			["sttu6l", "turbo1l"],
+			["sttu6l", "turbo4l"],
+	
+			["sttu5l", "turboexh"],
+			["sttu4l", "turboexh"],
+			{"beamSpring":0,"beamDamp":50},
+			["sttw1ll", "turbo1l"],
+			["sttw1ll", "turbo3l"],
+			{"breakGroup":""},
+			{"beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			//--STABILIZER--
+			{"beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			{"beamSpring":171000,"beamDamp":120},
+			{"beamDeform":40000,"beamStrength":"FLT_MAX"},
+			//brackets
+			["sttu1r","sttu2r"],
+			["sttu2r","sttu3r"],
+			["sttu3r","sttu1r"],
+	
+			["sttu4r","sttu5r"],
+			["sttu5r","sttu6r"],
+			["sttu6r","sttu4r"],
+	
+			//tube
+			{"beamDeform":30000,"beamStrength":"FLT_MAX"},
+			["sttu1r","stta1r"],
+			["sttu2r","stta1r"],
+			["sttu3r","stta1r"],
+	
+			["sttu1r","stta2r"],
+			["sttu2r","stta2r"],
+			["sttu3r","stta2r"],
+	
+			["stta1r","stta2r"],
+	
+			["sttu4r","stta1r"],
+			["sttu5r","stta1r"],
+			["sttu6r","stta1r"],
+	
+			["sttu4r","stta2r"],
+			["sttu5r","stta2r"],
+			["sttu6r","stta2r"],
+	
+			//hub
+			{"beamDeform":16000,"beamStrength":"FLT_MAX"},
+			["stta2r","sttw1r", {"name":"stab_t_R"}],
+			["stta2r","sttw1rr"],
+			["sttw1r","sttw1rr"],
+	
+			["sttw1r","sttu4r"],
+			["sttw1r","sttu5r"],
+			["sttw1r","sttu6r"],
+	
+			["sttw1rr","sttu4r"],
+			["sttw1rr","sttu5r"],
+			["sttw1rr","sttu6r"],
+	
+			["sttw1r","sttu1r"],
+			["sttw1r","sttu2r"],
+			["sttw1r","sttu3r"],
+	
+			["sttw1rr","sttu1r"],
+			["sttw1rr","sttu2r"],
+			["sttw1rr","sttu3r"],
+	
+			["sttw1rr","stta1r"],
+	
+			//attach
+			{"beamDeform":1700,"beamStrength":27000},
+			{"beamSpring":301000,"beamDamp":60},
+			{"breakGroup":"stabilizer_R_a"},
+			["sttu1r", "turbo3r"],
+			["sttu1r", "turbo1r"],
+			["sttu1r", "turbo6r"],
+			["sttu1r", "turbo4r"],
+	
+			["sttu2r", "turbo3r"],
+			["sttu2r", "turbo1r"],
+			["sttu2r", "turbo6r"],
+			["sttu2r", "turbo4r"],
+	
+			["sttu3r", "turbo3r"],
+			["sttu3r", "turbo1r"],
+			["sttu3r", "turbo6r"],
+			["sttu3r", "turbo4r"],
+	
+			["stta1r", "turbo3r"],
+			["stta1r", "turbo1r"],
+			["stta1r", "turbo6r"],
+			["stta1r", "turbo4r"],
+
+			["stta1r", "turbo2r"],
+			["stta2r", "turbo2r"],
+
+			["stta2r", "turbo1r"],
+			["stta2r", "turbo1l"],
+			["stta2r", "turboexh"],
+
+			["sttw1r", "turbo2r"],
+			["sttw1rr", "turbo2r"],
+
+			["sttw1r", "turbo1l"],
+			["sttw1r", "turboexh"],
+
+			["sttw1rr", "turbo1l"],
+			["sttw1rr", "turboexh"],
+
+			{"beamSpring":0,"beamDamp":50},
+			["sttw1rr", "turbo1r"],
+			["sttw1rr", "turbo4r"],
+	
+			{"breakGroup":"stabilizer_R_b"},
+			{"beamSpring":301000,"beamDamp":60},
+			["sttu4r", "turbo6r"],
+			["sttu4r", "turbo3r"],
+			["sttu4r", "turbo1r"],
+			["sttu4r", "turbo4r"],
+	
+			["sttu5r", "turbo6r"],
+			["sttu5r", "turbo3r"],
+			["sttu5r", "turbo1r"],
+			["sttu5r", "turbo4r"],
+	
+			["sttu6r", "turbo6r"],
+			["sttu6r", "turbo3r"],
+			["sttu6r", "turbo1r"],
+			["sttu6r", "turbo4r"],
+	
+			["sttu5r", "turboexh"],
+			["sttu4r", "turboexh"],
+			{"beamSpring":0,"beamDamp":50},
+			["sttw1rr", "turbo1r"],
+			["sttw1rr", "turbo3r"],
+			{"breakGroup":""},
+			{"beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+		],
+		"triangles": [
+				["id1:","id2:","id3:"],
+				//stabilizer
+				{"groundModel":"metal"},
+				{"group":"pigeon_stabilizer_R_t_mu"},
+				["sttu3r","sttu2r","sttu1r"],
+				["sttu4r","sttu6r","sttu5r"],
+	
+				{"group":"pigeon_stabilizer_L_t_mu"},
+				["sttu2l","sttu3l","sttu1l"],
+				["sttu4l","sttu5l","sttu6l"],
+				{"group":""},
+		],
+		"pressureWheels": [
+				["name","hubGroup","group","node1:","node2:","nodeS","nodeArm:","wheelDir"],
+	
+				//general settings
+				{"hubRadius":0.08},
+				{"wheelOffset":0.005},
+				{"hubWidth":0.025},
+				{"numRays":10},
+				{"hasTire":false},
+	
+				//hub options
+				{"hubBeamSpring":251000, "hubBeamDamp":5},
+				{"hubBeamDeform":40000, "hubBeamStrength":160000},
+				{"hubNodeWeight":0.1},
+				{"hubNodeMaterial":"|NM_RUBBER"},
+				{"hubFrictionCoef":0.8},
+	
+				//stabilizer wheel
+				{"propulsed":0},
+				{"brakeTorque":0},
+				{"parkingTorque":0},
+				{"selfCollision":true},
+				{"collision":true},
+				["STTR", "stabwheel_R_t_mu", "stabwheel_R_t_mu", "sttw1r", "sttw1rr", 9999, "stta1r", 1, {"speedo":false}],
+				["STTL", "stabwheel_L_t_mu", "stabwheel_L_t_mu","sttw1l", "sttw1ll", 9999, "stta1l", 1, {"speedo":false}],
+				{"propulsed":0},
+				{"hasTire":true}
+		]
+	}
+}

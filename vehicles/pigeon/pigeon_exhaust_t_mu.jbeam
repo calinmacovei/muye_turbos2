@@ -1,0 +1,852 @@
+{
+	"pigeon_exhaust_t_mu":{
+		"information":{
+			"authors":"fillman86",
+			"name":"3 Inch Exhaust",
+			"value":1000,
+		},
+		"slotType" : "pigeon_exhaust",
+
+		"slots": [
+			["type", "default", "description"],
+			["pigeon_exhaust_extra_pipe_t_mu","", "Exhaust Plugin"]
+		],
+
+		"flexbodies":[
+			["mesh", "[group]:","nonFlexMaterials"],
+			["pigeon_exhaust_3inch", ["pigeon_exhaust"]]
+		],
+
+		"mainEngine":{
+			"torqueModExhaust":[
+				["rpm", "torque"],
+				[0, 0],
+				[1000, -0],
+				[2000, -0.4],
+				[3000, -0.8],
+				[4000, -1.7],
+				[5000, -2.5],
+				[6000, -3],
+				[7000, -4],
+				[8000, -5],
+				[9000, -6],
+				[10000, -7]
+			]
+		},
+
+		"soundConfigExhaust": {
+			"$+lowShelfGain":10,
+			"$+highShelfGain":-2,
+			"$+eqHighGain":0,
+			"$+eqFundamentalGain":0
+		},
+
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true},
+			{"collision":true},
+			{"frictionCoef":0.5},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":0.8},
+			{"group":"pigeon_exhaust"},
+			["ex1l", 0.145,-0.422,0.286],
+			["ex2l", 0.135,-0.091,0.185],
+			["ex2ll",0.275,-0.091,0.185],
+			["ex3l", 0.154,0.593,0.251],
+			["ex3ll",0.256,0.593,0.251],
+			["ex4l", 0.16,1.0,0.375],
+			["ex4ll",0.25,1.0,0.375],
+			["ex5l", 0.215,1.5,0.24],
+			["ex5ll",0.3,1.5,0.24],
+			["ex6l", 0.295,1.8,0.2, {"afterFireAudioCoef":1.0, "afterFireVisualCoef":1.0, "afterFireVolumeCoef":1.0, "afterFireMufflingCoef":0.50, "exhaustAudioMufflingCoef":0.50, "exhaustAudioGainChange":-4}],
+	
+			//rigidifier
+			{"selfCollision":false},
+			{"collision":false},
+			["ex7l",0.205,-0.17,0.338],
+			["ex8l",0.205,0.513,0.374],
+			["ex9r",0.205,0.971,0.526],
+			["ex10l",0.26,1.546,0.37],
+			{"selfCollision":true},
+			{"collision":true},
+			{"group":""},
+			],
+		"beams":[
+			["id1:", "id2:"],
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1, "beamShortBound":1},
+			//main shape
+			{"beamSpring":301000,"beamDamp":40},
+			{"beamDeform":8000,"beamStrength":"FLT_MAX"},
+			{"deformLimitExpansion":1.2},
+			["ex1l", "ex2l", {"isExhaust":"mainEngine"}],
+			["ex2l", "ex3l", {"isExhaust":"mainEngine"}],
+			["ex3l", "ex4l", {"isExhaust":"mainEngine"}],
+			["ex4l", "ex5l", {"isExhaust":"mainEngine"}],
+			["ex5l", "ex6l", {"isExhaust":"mainEngine"}],
+			["ex1l", "ex2ll"],
+			["ex2ll", "ex3ll"],
+			["ex3ll", "ex4ll"],
+			["ex4ll", "ex5ll"],
+			["ex5ll", "ex6l"],
+			["ex2ll", "ex2l"],
+			["ex3ll", "ex3l"],
+			["ex4ll", "ex4l"],
+			["ex5ll", "ex5l"],
+	
+			//crossing
+			{"deformLimitExpansion":""},
+			{"beamDeform":4000,"beamStrength":"FLT_MAX"},
+			["ex2l", "ex3ll"],
+			["ex2ll", "ex3l"],
+			["ex3l", "ex4ll"],
+			["ex4l", "ex3ll"],
+			["ex4l", "ex5ll"],
+			["ex4ll", "ex5l"],
+	
+			//rigids
+			{"beamDeform":2000,"beamStrength":"FLT_MAX"},
+			["ex6l", "ex4ll"],
+			["ex6l", "ex4l"],
+			["ex5ll", "ex3ll"],
+			["ex5l", "ex3l"],
+			["ex4ll", "ex2ll"],
+			["ex4l", "ex2l"],
+			["ex3ll", "ex1l"],
+			["ex3l", "ex1l"],
+	
+			//rigidifier
+			{"beamSpring":221000,"beamDamp":40},
+			{"beamDeform":3000,"beamStrength":"FLT_MAX"},
+			["ex7l", "ex2ll"],
+			["ex7l", "ex2l"],
+			["ex7l", "ex1l"],
+			["ex7l", "ex3ll"],
+			["ex7l", "ex3l"],
+			["ex8l", "ex3ll"],
+			["ex8l", "ex3l"],
+			["ex8l", "ex2ll"],
+			["ex8l", "ex2l"],
+			["ex8l", "ex4ll"],
+			["ex8l", "ex4l"],
+			["ex9r", "ex4ll"],
+			["ex9r", "ex4l"],
+			["ex9r", "ex3l"],
+			["ex9r", "ex3ll"],
+			["ex9r", "ex5ll"],
+			["ex9r", "ex5l"],
+			["ex10l", "ex5ll"],
+			["ex10l", "ex5l"],
+			["ex10l", "ex4ll"],
+			["ex10l", "ex4l"],
+			["ex10l", "ex6l"],
+	
+			//attach
+			{"beamSpring":451000,"beamDamp":40},
+			{"beamDeform":7500,"beamStrength":21000},
+			//to engine
+			{"breakGroup":"exhaust_front"},
+			["ex1l", "exm1l", {"isExhaust":"mainEngine"}],
+			["ex1l", "e1l"],
+			["ex1l", "e2l"],
+			["ex1l", "e3l"],
+			["ex1l", "e4l"],
+			["ex1l", "e1r"],
+			["ex1l", "e2r"],
+			["ex1l", "e3r"],
+			["ex1l", "e4r"],
+	
+			//rear
+			{"beamSpring":11000,"beamDamp":80},
+			{"beamDeform":2000,"beamStrength":6000},
+			{"breakGroup":"exhaust_rear"},
+			["ex5l", "f18l"],
+			["ex5l", "f20l"],
+			["ex5l", "f18"],
+			["ex5l", "f20"],
+			["ex5l", "f6l"],
+			["ex5l", "f19l"],
+			["ex5ll", "f20l"],
+			["ex5ll", "f20"],
+			{"breakGroup":"exhaust_supportBeams"},
+	
+			//limiters
+			{"beamPrecompression":0.9, "beamType":"|SUPPORT", "beamLongBound":15},
+			{"beamSpring":351000,"beamDamp":40},
+			{"beamDeform":3000,"beamStrength":25000},
+			//vertical
+			["ex7l", "f3l"],
+			["ex7l", "f3"],
+			["ex8l", "f5l"],
+			["ex8l", "f5"],
+			["ex4ll", "f12l"],
+			["ex4l", "f12"],
+			["ex5ll", "f20l"],
+			["ex5l", "f20l"],
+			//widthwise
+			["ex2l", "f3l"],
+			["ex2ll", "f3"],
+			["ex3l", "f5l"],
+			["ex3ll", "f5"],
+			{"optional":true},
+			{"breakGroup":""},
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1, "beamShortBound":1},
+		],
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			{"groundModel":"metal"},
+			{"dragCoef":4.2},
+			{"group":"pigeon_exhaust"},
+			{"triangleType":"NONCOLLIDABLE"},
+			["ex1l", "ex2l", "ex2ll"],
+			["ex2l", "ex3l", "ex3ll"],
+			["ex3ll", "ex2ll", "ex2l"],
+			["ex3ll", "ex3l", "ex4l"],
+			["ex4l", "ex4ll", "ex3ll"],
+			["ex4ll", "ex4l", "ex5l"],
+			["ex5l", "ex5ll", "ex4ll"],
+			["ex5ll", "ex5l", "ex6l"],
+			{"group":""},
+			{"triangleType":"NORMALTYPE"},
+			],
+	},
+
+	"pigeon_dump_l_t_mu":{
+		"information":{
+			"authors":"fillman86",
+			"name":"Large Dump Pipe",
+			"value":350,
+		},
+		"slotType" : "pigeon_dump_l_t_mu",
+		"flexbodies":[
+			["mesh", "[group]:","nonFlexMaterials"],
+			["pigeon_dump_l_t_mu", ["pigeon_exhaust"]],
+		],
+		"mainEngine":{
+		},
+		"soundConfigExhaust": {
+			"$+lowShelfGain":20,
+			"$+highShelfGain":2,
+			"$+eqHighGain":10,
+			"$+eqFundamentalGain":10,
+		},
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true},
+			{"collision":true},
+			{"frictionCoef":0.5},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":0.8},
+			{"group":"pigeon_exhaust"},
+			["ex1l", 0.1459,-0.9601,0.8334],
+			["ex2l", 0.2873,-0.907,0.7784],
+			["ex2ll",0.2367,-1.0793,0.8077],
+			["ex3l", 0.1374,-0.9714,0.6567],
+			["ex3ll",0.0876,-1.1277,0.6665],
+			["ex4l", 0.1077,-1.0031,0.4029],
+			["ex4ll",0.1335,-1.1594,0.4124],
+			["ex5l", 0.2925,-0.9816,0.3225],
+			["ex5ll",0.2554,-1.1394,0.3284],
+			["ex6l", 0.3948,-1.0713,0.3045, {"afterFireAudioCoef":1.0, "afterFireVisualCoef":1.0, "afterFireVolumeCoef":1.0, "afterFireMufflingCoef":0.50, "exhaustAudioMufflingCoef":0.50, "exhaustAudioGainChange":-4}],
+	
+			//rigidifier
+			{"selfCollision":false},
+			{"collision":false},
+			["ex7l",0.2312,-0.9589,0.9238],
+			["ex8l",0.2343,-1.0608,0.6172],
+			["ex9r",0.2061,-1.0625,0.4922],
+			["ex10l",0.3532,-1.0744,0.4308],
+			{"selfCollision":true},
+			{"collision":true},
+			{"group":""},
+			],
+		"beams":[
+			["id1:", "id2:"],
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1, "beamShortBound":1},
+			//main shape
+			{"beamSpring":301000,"beamDamp":40},
+			{"beamDeform":8000,"beamStrength":"FLT_MAX"},
+			{"deformLimitExpansion":1.2},
+			["ex1l", "ex2l", {"isExhaust":"mainEngine"}],
+			["ex2l", "ex3l", {"isExhaust":"mainEngine"}],
+			["ex3l", "ex4l", {"isExhaust":"mainEngine"}],
+			["ex4l", "ex9r", {"isExhaust":"mainEngine"}],
+			["ex9r", "ex6l", {"isExhaust":"mainEngine"}],
+	
+			["ex4l", "ex5l"],
+			["ex5l", "ex6l"],
+			["ex1l", "ex2ll"],
+			["ex2ll", "ex3ll"],
+			["ex3ll", "ex4ll"],
+			["ex4ll", "ex5ll"],
+			["ex5ll", "ex6l"],
+			["ex2ll", "ex2l"],
+			["ex3ll", "ex3l"],
+			["ex4ll", "ex4l"],
+			["ex5ll", "ex5l"],
+	
+			//crossing
+			{"deformLimitExpansion":""},
+			{"beamDeform":4000,"beamStrength":"FLT_MAX"},
+			["ex2l", "ex3ll"],
+			["ex2ll", "ex3l"],
+			["ex3l", "ex4ll"],
+			["ex4l", "ex3ll"],
+			["ex4l", "ex5ll"],
+			["ex4ll", "ex5l"],
+	
+			//rigids
+			{"beamDeform":2000,"beamStrength":"FLT_MAX"},
+			["ex6l", "ex4ll"],
+			["ex6l", "ex4l"],
+			["ex5ll", "ex3ll"],
+			["ex5l", "ex3l"],
+			["ex4ll", "ex2ll"],
+			["ex4l", "ex2l"],
+			["ex3ll", "ex1l"],
+			["ex3l", "ex1l"],
+	
+			//rigidifier
+			{"beamSpring":221000,"beamDamp":40},
+			{"beamDeform":3000,"beamStrength":"FLT_MAX"},
+			["ex7l", "ex2ll"],
+			["ex7l", "ex2l"],
+			["ex7l", "ex1l"],
+			["ex7l", "ex3ll"],
+			["ex7l", "ex3l"],
+			["ex8l", "ex3ll"],
+			["ex8l", "ex3l"],
+			["ex8l", "ex2ll"],
+			["ex8l", "ex2l"],
+			["ex8l", "ex4ll"],
+			["ex8l", "ex4l"],
+			["ex9r", "ex4ll"],
+			//["ex9r", "ex4l"],
+			["ex9r", "ex3l"],
+			["ex9r", "ex3ll"],
+			["ex9r", "ex5ll"],
+			["ex9r", "ex5l"],
+			["ex10l", "ex5ll"],
+			["ex10l", "ex5l"],
+			["ex10l", "ex4ll"],
+			["ex10l", "ex4l"],
+			["ex10l", "ex6l"],
+	
+			//attach
+			{"beamSpring":851000,"beamDamp":40},
+			{"beamDeform":9500,"beamStrength":21000},
+			//to engine
+			{"breakGroup":"exhaust_front"},
+			["ex1l", "turboexh", {"isExhaust":"mainEngine"}],
+			["ex1l", "turbo1r"],
+			["ex1l", "turbo3r"],
+			["ex1l", "turbo6r"],
+			
+			["ex1l", "turbo1l"],
+			["ex1l", "turbo3l"],
+			["ex1l", "turbo6l"],
+	
+			["ex2l", "turbo1r"],
+			["ex2l", "turbo3r"],
+			["ex2l", "turbo6r"],
+	
+			["ex2l", "turbo1l"],
+			["ex2l", "turbo3l"],
+			["ex2l", "turbo6l"],
+	
+			["ex2ll", "turbo1r"],
+			["ex2ll", "turbo3r"],
+			["ex2ll", "turbo6r"],
+	
+			["ex2ll", "turbo1l"],
+			["ex2ll", "turbo3l"],
+			["ex2ll", "turbo6l"],
+	
+			["ex7l", "turbo1r"],
+			["ex7l", "turbo3r"],
+			["ex7l", "turbo6r"],
+	
+			["ex7l", "turbo1l"],
+			["ex7l", "turbo3l"],
+			["ex7l", "turbo6l"],
+	
+			["ex3l", "turbo1r"],
+			["ex3l", "turbo3r"],
+			["ex3l", "turbo6r"],
+	
+			["ex3l", "turbo1l"],
+			["ex3l", "turbo3l"],
+			["ex3l", "turbo6l"],
+	
+			["ex3ll", "turbo1r"],
+			["ex3ll", "turbo3r"],
+			["ex3ll", "turbo6r"],
+	
+			["ex3ll", "turbo1l"],
+			["ex3ll", "turbo3l"],
+			["ex3ll", "turbo6l"],
+	
+			//rear
+			{"beamSpring":11000,"beamDamp":80},
+			{"beamDeform":2000,"beamStrength":6000},
+			{"breakGroup":"exhaust_rear"},
+			//["ex5l", "f18l"],
+			//["ex5l", "f20l"],
+			//["ex5l", "f18"],
+			//["ex5l", "f20"],
+			//["ex5l", "f6l"],
+			//["ex5l", "f19l"],
+			//["ex5ll", "f20l"],
+			//["ex5ll", "f20"],
+			{"breakGroup":"exhaust_supportBeams"},
+	
+			//limiters
+			{"beamPrecompression":0.9, "beamType":"|SUPPORT", "beamLongBound":15},
+			{"beamSpring":351000,"beamDamp":40},
+			{"beamDeform":3000,"beamStrength":25000},
+			//vertical
+			//["ex7l", "f3l"],
+			//["ex7l", "f3"],
+			//["ex8l", "f5l"],
+			//["ex8l", "f5"],
+			//["ex4ll", "f12l"],
+			//["ex4l", "f12"],
+			//["ex5ll", "f20l"],
+			//["ex5l", "f20l"],
+			////widthwise
+			//["ex2l", "f3l"],
+			//["ex2ll", "f3"],
+			//["ex3l", "f5l"],
+			//["ex3ll", "f5"],
+			{"optional":true},
+			{"breakGroup":""},
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1, "beamShortBound":1},
+		],
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			{"groundModel":"metal"},
+			{"dragCoef":4.2},
+			{"group":"pigeon_exhaust"},
+			{"triangleType":"NONCOLLIDABLE"},
+			["ex1l", "ex2l", "ex2ll"],
+			["ex2l", "ex3l", "ex3ll"],
+			["ex3ll", "ex2ll", "ex2l"],
+			["ex3ll", "ex3l", "ex4l"],
+			["ex4l", "ex4ll", "ex3ll"],
+			["ex4ll", "ex4l", "ex5l"],
+			["ex5l", "ex5ll", "ex4ll"],
+			["ex5ll", "ex5l", "ex6l"],
+			{"group":""},
+			{"triangleType":"NORMALTYPE"},
+			],
+	},
+
+	"pigeon_exhaust_extra_pipe_xxl_t_mu":{
+		"information":{
+			"authors":"fillman86",
+			"name":"Turbo Rear Pipe XXL",
+			"value":100
+		},
+
+		"slotType" : "pigeon_exhaust_extra_pipe_t_mu"
+
+		"flexbodies":[
+			["mesh", "[group]:","nonFlexMaterials"],
+			["pigeon_exhaust_extra_pipe_xxl_t_mu", ["pigeon_exhaust_extra_pipe_t_mu"]]
+		],
+
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true},
+			{"collision":true},
+			{"frictionCoef":0.5},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":0.8},
+			{"group":"pigeon_exhaust_extra_pipe_t_mu"},
+			["exp1l", 0.3218,1.8231,0.1974],
+			["exp2l", 0.4715,2.0783,0.117],
+			["exp2ll",0.5546,1.9658,0.113],
+			["exp3l", 0.9709,2.0078,0.17],
+			["exp3ll",0.9355,1.9188,0.1368],
+			["exp4l", 0.8252,1.4975,0.7711],
+			["exp4ll",0.789,1.4148,0.7299],
+			["exp5l", 1.0640,1.6061,0.4322],
+			["exp5ll",1.0038,1.5445,0.3677],
+			["exp6l", 0.6475,1.4069,0.9853, {"afterFireAudioCoef":1.0, "afterFireVisualCoef":1.0, "afterFireVolumeCoef":1.0, "afterFireMufflingCoef":0.50, "exhaustAudioMufflingCoef":0.50, "exhaustAudioGainChange":-4}],
+	
+			//rigidifier
+			["exp7l",0.4861,2.0302,0.2409],
+			["exp8l",0.8863,1.9484,0.2615],
+			["exp9r",0.9622,1.6426,0.4397],
+			["exp10l",0.8722,1.3691,0.7799],
+			{"group":""}
+		],
+
+		"beams":[
+			["id1:", "id2:"],
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1, "beamShortBound":1},
+			//main shape
+			{"beamSpring":101000,"beamDamp":40},
+			{"beamDeform":8000,"beamStrength":"FLT_MAX"},
+			{"deformLimitExpansion":1.2},
+			["exp1l", "exp2l", {"isExhaust":"mainEngine"}],
+			["exp2l", "exp3l", {"isExhaust":"mainEngine"}],
+			["exp3l", "exp4l", {"isExhaust":"mainEngine"}],
+			["exp4l", "exp5l", {"isExhaust":"mainEngine"}],
+			["exp5l", "exp6l", {"isExhaust":"mainEngine"}],
+			["exp1l", "exp2ll"],
+			["exp2ll", "exp3ll"],
+			["exp3ll", "exp4ll"],
+			["exp4ll", "exp5ll"],
+			["exp5ll", "exp6l"],
+			["exp2ll", "exp2l"],
+			["exp3ll", "exp3l"],
+			["exp4ll", "exp4l"],
+			["exp5ll", "exp5l"],
+	
+			//crossing
+			{"deformLimitExpansion":""},
+			{"beamDeform":4000,"beamStrength":"FLT_MAX"},
+			["exp2l", "exp3ll"],
+			["exp2ll", "exp3l"],
+			["exp3l", "exp4ll"],
+			["exp4l", "exp3ll"],
+			["exp4l", "exp5ll"],
+			["exp4ll", "exp5l"],
+	
+			//rigids
+			{"beamDeform":2000,"beamStrength":"FLT_MAX"},
+			["exp6l", "exp4ll"],
+			["exp6l", "exp4l"],
+			["exp5ll", "exp3ll"],
+			["exp5l", "exp3l"],
+			["exp4ll", "exp2ll"],
+			["exp4l", "exp2l"],
+			["exp3ll", "exp1l"],
+			["exp3l", "exp1l"],
+			["exp3ll","exp5l"],
+	
+			//rigidifier
+			{"beamSpring":121000,"beamDamp":40},
+			{"beamDeform":3000,"beamStrength":"FLT_MAX"},
+			["exp7l", "exp2ll"],
+			["exp7l", "exp2l"],
+			["exp7l", "exp1l"],
+			["exp7l", "exp3ll"],
+			["exp7l", "exp3l"],
+			["exp8l", "exp3ll"],
+			["exp8l", "exp3l"],
+			["exp8l", "exp2ll"],
+			["exp8l", "exp2l"],
+			["exp8l", "exp4ll"],
+			["exp8l", "exp4l"],
+			["exp9r", "exp4ll"],
+			["exp9r", "exp4l"],
+			["exp9r", "exp3l"],
+			["exp9r", "exp3ll"],
+			["exp9r", "exp5ll"],
+			["exp9r", "exp5l"],
+			["exp10l", "exp5ll"],
+			["exp10l", "exp5l"],
+			["exp10l", "exp4ll"],
+			["exp10l", "exp4l"],
+			["exp10l", "exp6l"],
+	
+			//attach
+			{"beamSpring":451000,"beamDamp":40},
+			{"beamDeform":7500,"beamStrength":21000},
+			//to tailpipe
+			{"deformGroup":"mainEngine_turbo", "deformationTriggerRatio":0.01}
+			{"breakGroup":"pigeon_extra_pipe_t_mu_f"},
+			["ex6l", "exp1l", {"isExhaust":"mainEngine"}],
+			{"deformGroup":"", "deformationTriggerRatio":0.01}
+			["ex6l", "exp2l"],
+			["ex6l", "exp2ll"],
+			["ex6l", "exp7l"],
+	
+			["ex5l", "exp1l"],
+			["ex5l", "exp2l"],
+			["ex5l", "exp2ll"],
+			["ex5l", "exp7l"],
+	
+			["ex5ll", "exp1l"],
+			["ex5ll", "exp2l"],
+			["ex5ll", "exp2ll"],
+			["ex5ll", "exp7l"],
+	
+			["ex10l", "exp1l"],
+			["ex10l", "exp2l"],
+			["ex10l", "exp2ll"],
+			["ex10l", "exp7l"],
+	
+			//turbo end
+			{"beamSpring":11000,"beamDamp":80},
+			{"beamDeform":2000,"beamStrength":6000},
+			{"deformGroup":"mainEngine_turbo", "deformationTriggerRatio":0.01}
+			{"breakGroup":"pigeon_extra_pipe_t_mu_r"},
+			["exp6l",	"turbo3l", {"isExhaust":"mainEngine"}],
+			{"deformGroup":"", "deformationTriggerRatio":0.01}
+			["exp4l",	"turbo3l"],
+			["exp4ll",	"turbo3l"],
+			["exp10l",	"turbo3l"],
+			
+			["exp6l",	"turbo1l"],
+			["exp4l",	"turbo1l"],
+			["exp4ll",	"turbo1l"],
+			["exp10l",	"turbo1l"],
+			
+			["exp6l",	"turbo4l"],
+			["exp4l",	"turbo4l"],
+			["exp4ll",	"turbo4l"],
+			["exp10l",	"turbo4l"],
+
+			{"optional":false},
+			{"breakGroup":""},
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1, "beamShortBound":1}
+		],
+
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			{"groundModel":"metal"},
+			{"dragCoef":4.2},
+			{"breakGroup":"pigeon_extra_pipe_t_mu_f"},
+			["exp4ll","exp10l","exp6l"],
+			["exp4l","exp6l","exp10l"],
+			["exp4ll","exp6l","exp4l"],
+			["exp4l","exp10l","exp5l"],
+			["exp5l","exp9r","exp4l"],
+			["exp4ll","exp4l","exp9r"],
+			["exp5ll","exp4ll","exp9r"],
+			["exp5l","exp10l","exp5ll"],
+			["exp5l","exp3l","exp9r"],
+			["exp5l","exp3ll","exp3l"],
+			["exp5l","exp5ll","exp3ll"],
+			["exp5ll","exp9r","exp3ll"],
+			["exp3ll","exp9r","exp8l"],
+			["exp3l","exp8l","exp9r"],
+			["exp2ll","exp3ll","exp8l"],
+			["exp8l","exp7l","exp2ll"],
+			["exp2l","exp7l","exp8l"],
+			["exp8l","exp3l","exp2l"],
+			["exp3l","exp3ll","exp2l"],
+			["exp2l","exp3ll","exp2ll"],
+			["exp1l","exp7l","exp2l"],
+			["exp7l","exp1l","exp2ll"],
+			["exp1l","exp2l","exp2ll"],
+			["exp10l","exp4ll","exp5ll"],
+			{"group":""},
+		]
+	},
+
+	"pigeon_exhaust_extra_pipe_xxxl_t_mu":{
+		"information":{
+			"authors":"fillman86",
+			"name":"Turbo Rear Pipe XXXL",
+			"value":150
+		},
+
+		"slotType" : "pigeon_exhaust_extra_pipe_t_mu"
+
+		"flexbodies":[
+			["mesh", "[group]:","nonFlexMaterials"],
+			["pigeon_exhaust_extra_pipe_xxxl_t_mu", ["pigeon_exhaust_extra_pipe_t_mu"]]
+		],
+
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true},
+			{"collision":true},
+			{"frictionCoef":0.5},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":0.8},
+			{"group":"pigeon_exhaust_extra_pipe_t_mu"},
+			["exp1l", 0.3218,1.8231,0.1974],
+			{"frictionCoef":0.01},
+			["exp2l", 0.4186,2.1037,0.119],
+			["exp2ll",0.5311,2.0204,0.119],
+			["exp3l", 0.8691,2.3801,0.1997],
+			["exp3ll",0.903,2.2853,0.1832],
+
+			{"frictionCoef":0.5},
+			["exp4l", 1.2779,2.2644,0.5223],
+			["exp4ll",1.2531,2.1673,0.5264],
+
+			["exp5l", 1.1877,2.2192,0.7534],
+			["exp5ll",1.179,2.1153,0.7339],
+			["exp6l", 1.1168,2.1042,1.0423, {"afterFireAudioCoef":1.0, "afterFireVisualCoef":1.0, "afterFireVolumeCoef":1.0, "afterFireMufflingCoef":0.50, "exhaustAudioMufflingCoef":0.50, "exhaustAudioGainChange":-4}],
+	
+			//rigidifier
+			["exp7l",0.4279,2.0425,0.2376],
+			["exp8l",0.8867,2.3089,0.3174],
+			["exp9r",1.1583,2.2427,0.5618],
+			["exp10l",1.3052,2.1395,0.7594],
+			{"group":""}
+		],
+
+		"beams":[
+			["id1:", "id2:"],
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1, "beamShortBound":1},
+			//main shape
+			{"beamSpring":101000,"beamDamp":40},
+			{"beamDeform":8000,"beamStrength":"FLT_MAX"},
+			{"deformLimitExpansion":1.2},
+			["exp1l", "exp2l", {"isExhaust":"mainEngine"}],
+			["exp1l", "exp2ll"],
+			["exp7l", "exp1l"],
+
+			["exp7l", "exp2ll"],
+			["exp7l", "exp2l"],
+			["exp2ll", "exp2l"],
+
+			["exp8l", "exp3ll"],
+			["exp8l", "exp3l"],
+			["exp3ll", "exp3l"],
+
+			["exp4ll", "exp4l"],
+			["exp9r", "exp4ll"],
+			["exp9r", "exp4l"],
+
+			["exp5l", "exp6l", {"isExhaust":"mainEngine"}],
+			["exp5ll", "exp6l"],
+			["exp5ll", "exp5l"],
+			["exp10l", "exp5ll"],
+			["exp10l", "exp5l"],
+			["exp10l", "exp6l"],
+
+			//longitudinal connection
+			{"beamSpring":30000,"beamDamp":80},
+			["exp3ll", "exp1l"],
+			["exp3l", "exp1l"],
+			["exp2l", "exp3l", {"isExhaust":"mainEngine"}],
+
+			["exp2ll", "exp3ll"],
+			["exp2l", "exp3ll"],
+			["exp2ll", "exp3l"],
+			["exp4ll", "exp2ll"],
+			["exp4l", "exp2l"],
+			["exp8l", "exp2ll"],
+			["exp8l", "exp2l"],
+			["exp7l", "exp3ll"],
+			["exp7l", "exp3l"],
+
+			["exp3l", "exp4l", {"isExhaust":"mainEngine"}],
+
+
+			["exp3ll", "exp4ll"],
+			["exp3l", "exp4ll"],
+			["exp4l", "exp3ll"],
+			["exp5ll", "exp3ll"],
+			["exp5l", "exp3l"],
+			["exp9r", "exp3l"],
+			["exp8l", "exp4ll"],
+			["exp8l", "exp4l"],
+
+			["exp9r", "exp3ll"],
+			["exp3ll","exp5l"],
+
+			["exp4l", "exp5l", {"isExhaust":"mainEngine"}],
+
+
+			["exp4l", "exp5ll"],
+			["exp4ll", "exp5l"],
+			["exp10l", "exp4ll"],
+			["exp10l", "exp4l"],
+			["exp4ll", "exp5ll"],
+			["exp9r", "exp5ll"],
+			["exp9r", "exp5l"],
+
+			["exp6l", "exp4ll"],
+			["exp6l", "exp4l"],
+
+	
+			//attach
+			{"beamSpring":451000,"beamDamp":40},
+			{"beamDeform":7500,"beamStrength":21000},
+			//to tailpipe
+			{"deformGroup":"mainEngine_turbo", "deformationTriggerRatio":0.01}
+			{"breakGroup":"pigeon_extra_pipe_t_mu_f"},
+			["ex6l", "exp1l", {"isExhaust":"mainEngine"}],
+			{"deformGroup":"", "deformationTriggerRatio":0.01}
+	
+			["ex5l",  "exp1l"],
+			["ex5ll", "exp1l"],
+			["ex10l", "exp1l"],
+
+			["ex6l",  "exp2l"],
+			["ex6l",  "exp2ll"],
+			["ex5l",  "exp2l"],
+			["ex5l",  "exp2ll"],
+			["ex5ll", "exp2l"],
+			["ex5ll", "exp2ll"],
+			["ex10l", "exp2l"],
+			["ex10l", "exp2ll"],
+
+			{"beamSpring":41000,"beamDamp":40},
+			["ex6l", "exp7l"],
+			["ex5l", "exp7l"],
+			["ex5ll", "exp7l"],
+			["ex10l", "exp7l"],
+	
+			//turbo end
+			{"beamSpring":11000,"beamDamp":80},
+			{"beamDeform":2000,"beamStrength":6000},
+			{"deformGroup":"mainEngine_turbo", "deformationTriggerRatio":0.01}
+			{"breakGroup":"pigeon_extra_pipe_t_mu_r"},
+			["exp6l",	"turbo3l", {"isExhaust":"mainEngine"}],
+			{"deformGroup":"", "deformationTriggerRatio":0.01}
+			["exp4l",	"turbo3l"],
+			["exp4ll",	"turbo3l"],
+			["exp10l",	"turbo3l"],
+			
+			["exp6l",	"turbo1l"],
+			["exp4l",	"turbo1l"],
+			["exp4ll",	"turbo1l"],
+			["exp10l",	"turbo1l"],
+			
+			["exp6l",	"turbo4l"],
+			["exp4l",	"turbo4l"],
+			["exp4ll",	"turbo4l"],
+			["exp10l",	"turbo4l"],
+
+			["exp6l",	"turboexh"],
+			["exp4l",	"turboexh"],
+			["exp4ll",	"turboexh"],
+			["exp10l",	"turboexh"],
+
+			{"optional":false},
+			{"breakGroup":""},
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1, "beamShortBound":1}
+		],
+
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			{"groundModel":"metal"},
+			{"dragCoef":4.2},
+			{"breakGroup":"pigeon_extra_pipe_t_mu_f"},
+			["exp4ll","exp10l","exp6l"],
+			["exp4l","exp6l","exp10l"],
+			["exp4ll","exp6l","exp4l"],
+			["exp4l","exp10l","exp5l"],
+			["exp5l","exp9r","exp4l"],
+			["exp4ll","exp4l","exp9r"],
+			["exp5ll","exp4ll","exp9r"],
+			["exp5l","exp10l","exp5ll"],
+			["exp5l","exp3l","exp9r"],
+			["exp5l","exp3ll","exp3l"],
+			["exp5l","exp5ll","exp3ll"],
+			["exp5ll","exp9r","exp3ll"],
+			["exp3ll","exp9r","exp8l"],
+			["exp3l","exp8l","exp9r"],
+			["exp2ll","exp3ll","exp8l"],
+			["exp8l","exp7l","exp2ll"],
+			["exp2l","exp7l","exp8l"],
+			["exp8l","exp3l","exp2l"],
+			["exp3l","exp3ll","exp2l"],
+			["exp2l","exp3ll","exp2ll"],
+			["exp1l","exp7l","exp2l"],
+			["exp7l","exp1l","exp2ll"],
+			["exp1l","exp2l","exp2ll"],
+			["exp10l","exp4ll","exp5ll"],
+			{"group":""},
+		]
+	}
+}

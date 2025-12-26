@@ -1,0 +1,19 @@
+{
+	"pigeon_oilcooler_t_mu": {
+		"information":{
+			"authors":"fillman86",
+			"name":"Oil Cooler",
+			"value":310,
+		},
+		"slotType" : "pigeon_oilcooler_t_mu",
+		"flexbodies": [
+			 ["mesh", "[group]:", "nonFlexMaterials"],
+			 ["pigeon_oilcooler_t_mu", ["pigeon_engine","pigeon_radiator"]],
+		],
+		"mainEngine":{
+			"oilRadiatorArea":0.16,
+			"oilRadiatorEffectiveness":1000,
+			"oilThermostatTemperature":110,
+		},
+	},
+}

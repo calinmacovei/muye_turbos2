@@ -1,0 +1,42 @@
+{
+	"pigeon_boost_guage_t_mu": {
+		"information":{
+			"authors":"fillman86",
+			"name":"Imperial Turbo boost Gauge",
+			"value":200,
+		},
+		"slotType" : "pigeon_shiftlight",
+		"flexbodies": [
+			 ["mesh", "[group]:", "nonFlexMaterials"],
+			 ["pigeon_boost_guage_t_mu", ["pigeon_dash"]],
+		],
+		"props": [
+			["func",	"mesh",							"idRef:", "idX:", "idY:",  "baseRotation",		"rotation",					"translation",		"min", "max", "offset", "multiplier"],
+			//needles
+			["boost",	"pigeon_needle_boost__t_mu",	"dsh2","dsh2l","dsh3",  {"x":90, "y":0, "z":0}, {"x":0, "y":0, "z":-12},	{"x":0, "y":0, "z":0}, 0,	200,		-7.5,		1],
+		],
+		"glowMap":{
+			"bolide_gauges":{"simpleFunction":{"lowhighbeam":0.6}, "off":"bolide_gauges_mph", "on":"bolide_gauges_mph_on"},
+		}
+	},
+	"pigeon_boost_guage_metric_t_mu": {
+		"information":{
+			"authors":"fillman86",
+			"name":"Turbo boost Gauge",
+			"value":200,
+		},
+		"slotType" : "pigeon_shiftlight",
+		"flexbodies": [
+			 ["mesh", "[group]:", "nonFlexMaterials"],
+			 ["pigeon_boost_guage_t_mu", ["pigeon_dash"]],
+		],
+		"props": [
+			["func",	"mesh",							"idRef:", "idX:", "idY:",  "baseRotation",            "rotation",               "translation",          "min", "max", "offset", "multiplier"],
+			//needles
+			["boost",	"pigeon_needle_boost__t_mu",	"dsh2","dsh2l","dsh3",  {"x":90, "y":0, "z":0}, {"x":0, "y":0, "z":-12},     {"x":0, "y":0, "z":0}, 0, 200, -7.5, 1],
+		],
+		"glowMap":{
+			"bolide_gauges":{"simpleFunction":{"lowhighbeam":0.6}, "off":"bolide_gauges", "on":"bolide_gauges_on"},
+		}
+	}
+}

@@ -1,0 +1,21 @@
+{
+	"BoundingBox": [[-0.36,-1.261,-0.2033],[1.08,2.012,1.27]],
+	"Config Type":"Custom",
+	"Configuration":"Turbo L (M)",
+	"Description":"Want a pigeon that might not blow up?",
+	"Drivetrain":"RWD",
+	"Fuel Type":"Petrol",
+	"Induction Type":"NA",
+	"Off-Road Score":34,
+	"Population":1,
+	"Power":560,
+	"PowerPeakRPM":"9900 - 10000",
+	"Propulsion":"ICE",
+	"Torque":416,
+	"TorquePeakRPM":"9900 - 10000",
+	"Transmission":"Manual",
+	"Value":120004,
+	"Weight":611,
+	"default_color":"Sunset Purple",
+	"default_color_2":"Midnight Pearl"
+}

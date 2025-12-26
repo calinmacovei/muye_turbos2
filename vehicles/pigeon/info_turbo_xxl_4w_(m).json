@@ -1,0 +1,21 @@
+{
+	"BoundingBox": [[-0.36,-1.261,-0.2033],[1.08,2.012,1.27]],
+	"Config Type": "Custom",
+	"Configuration": "Turbo XXL Plus (M)",
+	"Description": "It won't spool, trust me.",
+	"Drivetrain": "RWD",
+	"Fuel Type": "Petrol",
+	"Induction Type": "NA",
+	"Off-Road Score": 34,
+	"Population": 1,
+	"Power": 1890,
+	"PowerPeakRPM": "19500 - 20000",
+	"Propulsion": "ICE",
+	"Torque": 1388,
+	"TorquePeakRPM": "19500 - 20000",
+	"Transmission": "Manual",
+	"Value": 120006,
+	"Weight": 770,
+	"default_color": "Sunset Purple",
+	"default_color_2": "Midnight Pearl"
+}

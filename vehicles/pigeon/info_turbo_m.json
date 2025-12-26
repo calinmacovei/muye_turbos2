@@ -1,0 +1,22 @@
+{
+	"BoundingBox": [[-0.36,-1.261,-0.2033],[1.08,2.012,1.27]],
+	"Braking G":0.697,
+	"Config Type":"Custom",
+	"Configuration":"Turbo M (M)",
+	"Description":"Want a pigeon with an absurd amount of power?",
+	"Drivetrain":"RWD",
+	"Fuel Type":"Petrol",
+	"Induction Type":"NA",
+	"Off-Road Score":34,
+	"Population":1,
+	"Power":251,
+	"PowerPeakRPM":"6000 - 6200",
+	"Propulsion":"ICE",
+	"Torque":295,
+	"TorquePeakRPM":"5800 - 6200",
+	"Transmission":"Manual",
+	"Value":120003,
+	"Weight":611,
+	"default_color":"Sunset Purple",
+	"default_color_2":"Midnight Pearl"
+}

@@ -1,0 +1,2848 @@
+{
+	"pigeon_engine_i3_t_mu": {
+		"information":{
+			"authors":"fillman86",
+			"name":"550cc I3 Turbo Engine",
+			"value":250
+		},
+
+		"slotType" : "pigeon_engine"
+
+		"slots": [
+			["type", "default", "description"],
+			["pigeon_enginemounts","pigeon_enginemounts","Engine Mounts", {"coreSlot":true}],
+			["pigeon_i3_intake_t_mu","pigeon_i3_intake_t_mu","Intake", {"coreSlot":true}],
+			["pigeon_i3_oilpan","pigeon_i3_oilpan","Oil Pan", {"coreSlot":true}],
+			["pigeon_i3_radiator","pigeon_i3_radiator", "Radiator"],
+			["pigeon_i3_ecu","", "Engine Management"],
+			["n2o_system","", "Nitrous Oxide System"],
+			["pigeon_i3_internals","pigeon_i3_internals", "Engine Long Block", {"coreSlot":true}],
+			["pigeon_transmission","pigeon_transmission_3M", "Transmission"]
+			["pigeon_oilcooler_t_mu","", "Oil Cooler"]
+		],
+
+		"powertrain": [
+			["type", "name", "inputName", "inputIndex"],
+			["combustionEngine", "mainEngine", "dummy", 0]
+		],
+
+		"mainEngine": {
+			"torque":[
+				["rpm", "torque"],
+				[0, 0],
+				[500,  28.8],
+				[1000, 38.0],
+				[2000, 50.6],
+				[3000, 56.3],
+				[4000, 58.6],
+				[5000, 59.7],
+				[6000, 56.3],
+				[7000, 40.2],
+				[8000, 24],
+				[9000, 13],
+				[10000, 1]
+			],
+	
+			"idleRPM":780,
+			"maxRPM":6100,
+			"revLimiterRPMDrop":200,
+			"inertia":0.045,
+			"friction":6,
+			"dynamicFriction":0.012,
+			"engineBrakeTorque":13,
+			//"burnEfficiency":0.3
+			"burnEfficiency":[
+				[0, 0.14],
+				[0.05, 0.24],
+				[0.4, 0.32],
+				[0.7, 0.45],
+				[1, 0.37]
+			],
+			//fuel system
+			"energyStorage": "mainTank",
+			"requiredEnergyType":"gasoline",
+	
+			//exhaust
+			"instantAfterFireSound": "event:>Vehicle>Afterfire>i6_01>single",
+			"sustainedAfterFireSound": "event:>Vehicle>Afterfire>i6_01>multi",
+			"shiftAfterFireSound": "event:>Vehicle>Afterfire>i6_01>shift",
+			"particulates":0.1,
+			"instantAfterFireCoef": 0.0,
+			"sustainedAfterFireCoef": 0.0,
+	
+			//cooling and oil system
+			"thermalsEnabled":true,
+			"engineBlockMaterial":"aluminum",
+			//"oilVolume":2,
+			"engineBlockAirCoolingEfficiency":10,
+	
+			//engine durability
+			"cylinderWallTemperatureDamageThreshold":150,
+			"headGasketDamageThreshold":1500000,
+			"pistonRingDamageThreshold":1500000,
+			"connectingRodDamageThreshold":1500000,
+			"maxTorqueRating": 95,
+			"maxOverTorqueDamage": 250,
+	
+			//node beam interface
+			"torqueReactionNodes:":["e1l","e2l","e4r"],
+			"waterDamage": {"[engineGroup]:":["engine_intake"]},
+			"radiator": {"[engineGroup]:":["radiator"]},
+			"engineBlock": {"[engineGroup]:":["engine_block"]},
+			"breakTriggerBeam":"engine",
+			"uiName":"Engine",
+			"soundConfig": "soundConfig",
+			"soundConfigExhaust": "soundConfigExhaust",
+	
+			//starter motor
+			"starterSample":"event:>Engine>Starter>i4_2011_eng",
+			"starterSampleExhaust":"event:>Engine>Starter>i4_2011_exh",
+			"shutOffSampleEngine":"event:>Engine>Shutoff>i4_2011_eng",
+			"shutOffSampleExhaust":"event:>Engine>Shutoff>i4_2011_exh",
+			"starterVolume":0.76,
+			"starterVolumeExhaust":0.76,
+			"shutOffVolumeEngine":0.76,
+			"shutOffVolumeExhaust":0.76,
+			"starterThrottleKillTime":0.85,
+			"idleRPMStartRate":2,
+			"idleRPMStartCoef":1,
+	
+			//engine deform groups
+			"deformGroups":["mainEngine", "mainEngine_intake", "mainEngine_accessories"]
+			"deformGroups_oilPan":["oilpan_damage"]
+		},
+
+		"soundConfig": {
+			"sampleName": "I3_engine",
+			"intakeMuffling": 1,
+	
+			"mainGain": -12,
+			"onLoadGain":1.0,
+			"offLoadGain":0.3,
+	
+			"maxLoadMix": 0.7,
+			"minLoadMix": 0,
+	
+			"lowShelfGain":-0,
+			"lowShelfFreq":150,
+	
+			"highShelfGain":4,
+			"highShelfFreq":7500,
+	
+			"eqLowGain":-15,
+			"eqLowFreq": 420,
+			"eqLowWidth": 0.1,
+	
+			"eqHighGain": -3,
+			"eqHighFreq": 4000,
+			"eqHighWidth": 0.1,
+	
+			"fundamentalFrequencyCylinderCount":3,
+			"eqFundamentalGain": -2
+		},
+
+		"soundConfigExhaust": {
+			"sampleName": "I3_exhaust",
+	
+			"mainGain": -4.5,
+			"onLoadGain":1.0,
+			"offLoadGain":0.2,
+	
+			"maxLoadMix": 0.8,
+			"minLoadMix": 0,
+	
+			"lowShelfGain":-12,
+			"lowShelfFreq":100,
+	
+			"highShelfGain":4,
+			"highShelfFreq":6000,
+	
+			"eqLowGain":-15,
+			"eqLowFreq": 420,
+			"eqLowWidth": 0.1,
+	
+			"eqHighGain": -12,
+			"eqHighFreq": 4000,
+			"eqHighWidth": 0.1,
+	
+			"fundamentalFrequencyCylinderCount":3,
+			"eqFundamentalGain": -4
+		},
+
+		"vehicleController": {
+			"clutchLaunchStartRPM":1200,
+			"clutchLaunchTargetRPM":1800,
+			//**highShiftDown can be overwritten by automatic transmissions**
+			"highShiftDownRPM":[0,0,0,1600,2100,2300,2300],
+			//**highShiftUp can be overwritten by intake modifications**
+			"highShiftUpRPM":4300
+		},
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["pigeon_engine_t_mu", "pigeon_engine"]
+		],
+
+		"nodes": [
+			["id", "posX", "posY", "posZ"],
+			//--550cc I3 Engine--
+			{"selfCollision":false},
+			{"collision":true},
+			{"nodeMaterial":"|NM_METAL"},
+			{"frictionCoef":0.5},
+			{"group":"pigeon_engine"},
+			{"nodeWeight":6.5},
+			{"engineGroup":"engine_block"},
+			{"chemEnergy":1000,"burnRate":0.39,"flashPoint":700,"specHeat": 0.2,"selfIgnitionCoef":false,"smokePoint":600,"baseTemp":"thermals","conductionRadius":0.15},
+			["e1r", -0.12, -0.37, 0.18],
+			["e1l", 0.12, -0.37, 0.18],
+			["e2r", -0.12, -0.69, 0.18],
+			["e2l", 0.12, -0.69, 0.18,{"group":["pigeon_engine","pigeon_manifold"]}],
+			{"chemEnergy":false,"burnRate":false,"flashPoint":false, "specHeat": false,"selfIgnitionCoef":false,"smokePoint":false,"baseTemp":false,"conductionRadius":false},
+			{"nodeWeight":3.5},
+			{"engineGroup":["engine_intake","engine_block"]},
+			["e3r", -0.10, -0.37, 0.61,],
+			["e3l", 0.10, -0.37, 0.61],
+			["e4r", -0.10, -0.69, 0.61,{"isExhaust":"mainEngine"}],
+			["e4l", 0.10, -0.69, 0.61],
+			{"engineGroup":""},
+			{"group":""},
+			//engine mount nodes
+			["em1r", -0.16, -0.53, 0.28, {"nodeWeight":0.75}],
+			["em1l", 0.16, -0.53, 0.28, {"nodeWeight":0.75}]
+		],
+
+		"beams": [
+			["id1:", "id2:"],
+			{"beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			{"beamSpring":4001000,"beamDamp":250},
+			{"beamDeform":80000,"beamStrength":"FLT_MAX"},
+			//engine
+			{"deformGroup":"mainEngine", "deformationTriggerRatio":0.001}
+			["e1r","e1l"],
+			["e2r","e2l"],
+			["e3r","e3l"],
+			["e4r","e4l", {"isExhaust":"mainEngine"}],
+	
+			["e1r","e2r"],
+			["e1l","e2l"],
+			["e3r","e4r"],
+			["e3l","e4l"],
+	
+			["e1r","e3r"],
+			["e1l","e3l"],
+			["e2r","e4r"],
+			["e2l","e4l"],
+	
+			["e2r","e3r"],
+			["e2l","e3l"],
+			["e2r","e3l"],
+			["e2l","e3r"],
+	
+			["e1r","e4r"],
+			["e1l","e4l"],
+			["e1r","e4l"],
+			["e1l","e4r"],
+	
+			["e1r","e2l"],
+			["e1l","e2r"],
+			["e3r","e4l"],
+			["e3l","e4r"],
+	
+			["e1r","e3l"],
+			["e1l","e3r"],
+			["e2r","e4l"],
+			["e2l","e4r"],
+	
+			//engine mount nodes
+			{"beamSpring":1001000,"beamDamp":100},
+			{"beamDeform":45000,"beamStrength":"FLT_MAX"},
+			["em1r","e3l"],
+			["em1r","e3r"],
+			["em1r","e4l"],
+			["em1r","e4r"],
+			["em1r", "e1r"],
+			["em1r", "e1l"],
+			["em1r", "e2l"],
+			["em1r", "e2r"],
+	
+			["em1l","e3l"],
+			["em1l","e3r"],
+			["em1l","e4l"],
+			["em1l","e4r"],
+			["em1l", "e1r"],
+			["em1l", "e1l"],
+			["em1l", "e2l"],
+			["em1l", "e2r"],
+	
+			{"deformGroup":"", "deformationTriggerRatio":""},
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+		],
+		"triangles": [
+				["id1:","id2:","id3:"],
+				{"triangleType":"NONCOLLIDABLE"},
+				["e2r", "e1r", "e1l"],
+				["e1l", "e2l", "e2r"],
+				{"triangleType":"NORMALTYPE"},
+		],
+	},
+
+	"pigeon_engine_i3_fix_t_mu": {
+		"information":{
+			"authors":"fillman86",
+			"name":"550cc I3 Super Turbo Engine",
+			"value":250
+		},
+
+		"slotType" : "pigeon_engine"
+
+		"slots": [
+			["type", "default", "description"],
+			["pigeon_enginemounts","pigeon_enginemounts","Engine Mounts", {"coreSlot":true}],
+			["pigeon_i3_intake_t_mu","pigeon_i3_intake_t_mu","Intake", {"coreSlot":true}],
+			["pigeon_i3_oilpan","pigeon_i3_oilpan","Oil Pan", {"coreSlot":true}],
+			["pigeon_i3_radiator","pigeon_i3_radiator", "Radiator"],
+			["pigeon_i3_ecu","", "Engine Management"],
+			["n2o_system","", "Nitrous Oxide System"],
+			["pigeon_i3_internals","pigeon_i3_internals", "Engine Long Block", {"coreSlot":true}],
+			["pigeon_transmission","pigeon_transmission_3M", "Transmission"]
+			["pigeon_oilcooler_t_mu","", "Oil Cooler"]
+		],
+
+		"powertrain": [
+			["type", "name", "inputName", "inputIndex"],
+			["combustionEngine", "mainEngine", "dummy", 0]
+		],
+
+		"mainEngine": {
+			"torque":[
+				["rpm", "torque"],
+				[0, 0],
+				[500,  28.8],
+				[1000, 38.0],
+				[2000, 50.6],
+				[3000, 56.3],
+				[4000, 58.6],
+				[5000, 59.7],
+				[6500, 59.7],
+				[30000, 59.7]
+			],
+	
+			"idleRPM":1780,
+			"maxRPM":26100,
+			"revLimiterRPMDrop":200,
+			"inertia":0.045,
+			"friction":6,
+			"dynamicFriction":0.012,
+			"engineBrakeTorque":13,
+			//"burnEfficiency":0.3
+			"burnEfficiency":[
+				[0, 0.14],
+				[0.05, 0.24],
+				[0.4, 0.32],
+				[0.7, 0.45],
+				[1, 0.37]
+			],
+			//fuel system
+			"energyStorage": "mainTank",
+			"requiredEnergyType":"gasoline",
+	
+			//exhaust
+			"instantAfterFireSound": "event:>Vehicle>Afterfire>i6_01>single",
+			"sustainedAfterFireSound": "event:>Vehicle>Afterfire>i6_01>multi",
+			"shiftAfterFireSound": "event:>Vehicle>Afterfire>i6_01>shift",
+			"particulates":0.1,
+			"instantAfterFireCoef": 0.0,
+			"sustainedAfterFireCoef": 0.0,
+	
+			//cooling and oil system
+			"thermalsEnabled":true,
+			"engineBlockMaterial":"aluminum",
+			//"oilVolume":2,
+			"engineBlockAirCoolingEfficiency":10,
+	
+			//engine durability
+			"cylinderWallTemperatureDamageThreshold":150,
+			"headGasketDamageThreshold":1500000,
+			"pistonRingDamageThreshold":1500000,
+			"connectingRodDamageThreshold":1500000,
+			"maxTorqueRating": 95,
+			"maxOverTorqueDamage": 250,
+	
+			//node beam interface
+			"torqueReactionNodes:":["e1l","e2l","e4r"],
+			"waterDamage": {"[engineGroup]:":["engine_intake"]},
+			"radiator": {"[engineGroup]:":["radiator"]},
+			"engineBlock": {"[engineGroup]:":["engine_block"]},
+			"breakTriggerBeam":"engine",
+			"uiName":"Engine",
+			"soundConfig": "soundConfig",
+			"soundConfigExhaust": "soundConfigExhaust",
+	
+			//starter motor
+			"starterSample":"event:>Engine>Starter>i4_2011_eng",
+			"starterSampleExhaust":"event:>Engine>Starter>i4_2011_exh",
+			"shutOffSampleEngine":"event:>Engine>Shutoff>i4_2011_eng",
+			"shutOffSampleExhaust":"event:>Engine>Shutoff>i4_2011_exh",
+			"starterVolume":0.76,
+			"starterVolumeExhaust":0.76,
+			"shutOffVolumeEngine":0.76,
+			"shutOffVolumeExhaust":0.76,
+			"starterThrottleKillTime":0.85,
+			"idleRPMStartRate":2,
+			"idleRPMStartCoef":1,
+	
+			//engine deform groups
+			"deformGroups":["mainEngine", "mainEngine_intake", "mainEngine_accessories"]
+			"deformGroups_oilPan":["oilpan_damage"]
+		},
+
+		"soundConfig": {
+			"sampleName": "I3_engine",
+			"intakeMuffling": 1,
+	
+			"mainGain": -12,
+			"onLoadGain":1.0,
+			"offLoadGain":0.3,
+	
+			"maxLoadMix": 0.7,
+			"minLoadMix": 0,
+	
+			"lowShelfGain":-0,
+			"lowShelfFreq":150,
+	
+			"highShelfGain":4,
+			"highShelfFreq":7500,
+	
+			"eqLowGain":-15,
+			"eqLowFreq": 420,
+			"eqLowWidth": 0.1,
+	
+			"eqHighGain": -3,
+			"eqHighFreq": 4000,
+			"eqHighWidth": 0.1,
+	
+			"fundamentalFrequencyCylinderCount":3,
+			"eqFundamentalGain": -2
+		},
+
+		"soundConfigExhaust": {
+			"sampleName": "I3_exhaust",
+	
+			"mainGain": -4.5,
+			"onLoadGain":1.0,
+			"offLoadGain":0.2,
+	
+			"maxLoadMix": 0.8,
+			"minLoadMix": 0,
+	
+			"lowShelfGain":-12,
+			"lowShelfFreq":100,
+	
+			"highShelfGain":4,
+			"highShelfFreq":6000,
+	
+			"eqLowGain":-15,
+			"eqLowFreq": 420,
+			"eqLowWidth": 0.1,
+	
+			"eqHighGain": -12,
+			"eqHighFreq": 4000,
+			"eqHighWidth": 0.1,
+	
+			"fundamentalFrequencyCylinderCount":3,
+			"eqFundamentalGain": -4
+		},
+
+		"vehicleController": {
+			"clutchLaunchStartRPM":1200,
+			"clutchLaunchTargetRPM":1800,
+			//**highShiftDown can be overwritten by automatic transmissions**
+			"highShiftDownRPM":[0,0,0,1600,2100,2300,2300],
+			//**highShiftUp can be overwritten by intake modifications**
+			"highShiftUpRPM":4300
+		},
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["pigeon_engine_t_mu", "pigeon_engine"]
+		],
+
+		"nodes": [
+			["id", "posX", "posY", "posZ"],
+			//--550cc I3 Engine--
+			{"selfCollision":false},
+			{"collision":true},
+			{"nodeMaterial":"|NM_METAL"},
+			{"frictionCoef":0.5},
+			{"group":"pigeon_engine"},
+			{"nodeWeight":6.5},
+			{"engineGroup":"engine_block"},
+			{"chemEnergy":1000,"burnRate":0.39,"flashPoint":700,"specHeat": 0.2,"selfIgnitionCoef":false,"smokePoint":600,"baseTemp":"thermals","conductionRadius":0.15},
+			["e1r", -0.12, -0.37, 0.18],
+			["e1l", 0.12, -0.37, 0.18],
+			["e2r", -0.12, -0.69, 0.18],
+			["e2l", 0.12, -0.69, 0.18,{"group":["pigeon_engine","pigeon_manifold"]}],
+			{"chemEnergy":false,"burnRate":false,"flashPoint":false, "specHeat": false,"selfIgnitionCoef":false,"smokePoint":false,"baseTemp":false,"conductionRadius":false},
+			{"nodeWeight":3.5},
+			{"engineGroup":["engine_intake","engine_block"]},
+			["e3r", -0.10, -0.37, 0.61,],
+			["e3l", 0.10, -0.37, 0.61],
+			["e4r", -0.10, -0.69, 0.61,{"isExhaust":"mainEngine"}],
+			["e4l", 0.10, -0.69, 0.61],
+			{"engineGroup":""},
+			{"group":""},
+			//engine mount nodes
+			["em1r", -0.16, -0.53, 0.28, {"nodeWeight":0.75}],
+			["em1l", 0.16, -0.53, 0.28, {"nodeWeight":0.75}]
+		],
+
+		"beams": [
+			["id1:", "id2:"],
+			{"beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			{"beamSpring":4001000,"beamDamp":250},
+			{"beamDeform":80000,"beamStrength":"FLT_MAX"},
+			//engine
+			{"deformGroup":"mainEngine", "deformationTriggerRatio":0.001}
+			["e1r","e1l"],
+			["e2r","e2l"],
+			["e3r","e3l"],
+			["e4r","e4l", {"isExhaust":"mainEngine"}],
+	
+			["e1r","e2r"],
+			["e1l","e2l"],
+			["e3r","e4r"],
+			["e3l","e4l"],
+	
+			["e1r","e3r"],
+			["e1l","e3l"],
+			["e2r","e4r"],
+			["e2l","e4l"],
+	
+			["e2r","e3r"],
+			["e2l","e3l"],
+			["e2r","e3l"],
+			["e2l","e3r"],
+	
+			["e1r","e4r"],
+			["e1l","e4l"],
+			["e1r","e4l"],
+			["e1l","e4r"],
+	
+			["e1r","e2l"],
+			["e1l","e2r"],
+			["e3r","e4l"],
+			["e3l","e4r"],
+	
+			["e1r","e3l"],
+			["e1l","e3r"],
+			["e2r","e4l"],
+			["e2l","e4r"],
+	
+			//engine mount nodes
+			{"beamSpring":1001000,"beamDamp":100},
+			{"beamDeform":45000,"beamStrength":"FLT_MAX"},
+			["em1r","e3l"],
+			["em1r","e3r"],
+			["em1r","e4l"],
+			["em1r","e4r"],
+			["em1r", "e1r"],
+			["em1r", "e1l"],
+			["em1r", "e2l"],
+			["em1r", "e2r"],
+	
+			["em1l","e3l"],
+			["em1l","e3r"],
+			["em1l","e4l"],
+			["em1l","e4r"],
+			["em1l", "e1r"],
+			["em1l", "e1l"],
+			["em1l", "e2l"],
+			["em1l", "e2r"],
+	
+			{"deformGroup":"", "deformationTriggerRatio":""},
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+		],
+		"triangles": [
+			["id1:","id2:","id3:"],
+			{"triangleType":"NONCOLLIDABLE"},
+			["e2r", "e1r", "e1l"],
+			["e1l", "e2l", "e2r"],
+			{"triangleType":"NORMALTYPE"},
+		],
+	},
+
+	"pigeon_i3_stock_intake": {
+		"information":{
+			"authors":"fillman86",
+			"name":"Stock Intake",
+			"value":200
+		},
+
+		"slotType" : "pigeon_i3_intake_t_mu"
+
+		"mainEngine":{
+		},
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["pigeon_na_header_t_mu", "pigeon_engine"]
+		]
+	},
+
+	"pigeon_i3_turbo_tiny": {
+		"information":{
+			"authors":"fillman86",
+			"name":"Turbo System XXS",
+			"value":500
+		},
+
+		"slotType" : "pigeon_i3_intake_t_mu"
+	
+		"turbocharger": {
+			"bovSoundFileName":"event:>Vehicle>Forced_Induction>Turbo_01>turbo_bov",
+			"hissLoopEvent":"event:>Vehicle>Forced_Induction>Turbo_07>turbo_hiss",
+			"whineLoopEvent":"event:>Vehicle>Forced_Induction>Turbo_05>turbo_spin",
+			"turboSizeCoef": 0.20,
+			"bovSoundVolumeCoef": 0.30,
+			"hissVolumePerPSI": 0.140,
+			"whineVolumePer10kRPM": 0.12,
+			"whinePitchPer10kRPM": 0.09,
+			"maxExhaustPower": 190000,
+			"backPressureCoef": 0.000001,
+			"pressureRatePSI": 30,
+			"frictionCoef": 16,
+			"inertia":0.30,
+			"damageThresholdTemperature": 250,
+			"wastegateStart":4,
+			"wastegateLimit":4.5,
+			"pressurePSI":[
+				//turbineRPM, pressure(PSI)
+				[0,       0],
+				[25000,   5],
+				[50000,   7],
+				[100000, 9],
+				[150000, 10],
+				[200000, 10.5],
+				[250000, 10.75],
+				[300000, 10.8],
+				[400000, 10.82],
+				],
+			"engineDef":[
+				//engineRPM, efficiency, exhaustFactor
+				[0,     0.0,     0.05],
+				[10,     0.2,     0.10],
+				[650,   0.90,    0.20],
+				[1500,  0.82,    0.40],
+				[2000,  0.71,    0.90],
+				[2500,  0.6,    0.92],
+				[3000,  0.4,     0.90],
+				[3500,  0.3,     0.80],
+				[4000,  0.2,     0.75],
+				[5000,  0.1,     0.74],
+				[6000,  0.05,     0.73],
+				[7000,  0.0,     0.72],
+				[8000,  0.0,     0.71],
+			]
+		},
+		
+		"soundConfig": {
+			"$+mainGain": 0.0,
+			"$+intakeMuffling":-0.2,
+			"$+maxLoadMix": 0.2,
+			"$+minLoadMix": 0.14,
+			"$+highShelfGain": 1.0,
+			"$+eqLowGain": -1.5,
+			"$+eqFundamentalGain": -4
+		},
+
+		"soundConfigExhaust": {
+			"$+mainGain": -0.9,
+			"$+maxLoadMix": 0.2,
+			"$+minLoadMix": 0.10,
+			"$+offLoadGain": 0.04,
+			"$+lowShelfGain": 0.9,
+			"$+highShelfGain": 1.0,
+			"$+eqLowGain": 0.0,
+			"$+eqHighGain": 1.0,
+			"$+eqFundamentalGain": 1.5
+		},
+		
+		"mainEngine": {
+			"torqueModIntake":[
+				["rpm", "torque"],
+				[0, 0],
+				[500,  -7],
+				[1000, -8],
+				[2000, -9],
+				[3000, -10],
+				[4000, -11],
+				[5000, -12],
+				[6000, -14],
+				[7000, -16],
+				[8000, -18],
+				[9000, -25],
+				[10000, -50]
+			],
+			//turbocharger name
+			"turbocharger":"turbocharger",
+			//"instantAfterFireCoef": 1,
+			//"sustainedAfterFireCoef": 0.75,
+			//"$*instantAfterFireCoef": 2,
+			//"$*sustainedAfterFireCoef": 2,
+	
+			//damage deformGroups
+			"deformGroups_turbo":["mainEngine_turbo"]
+		},
+		
+		"controller": [
+			["fileName"],
+			["turboGlow", {"turboStartGlow":250,"turboGlowTemp":290,"tempEndGlow":300,"turboGlowValue":[1,2,3], "maxGlow":1}]
+		],
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["pigeon_header_t_mu", ["pigeon_engine","pigeon_t_mu"]]
+			["pigeon_dump_xs_t_mu", ["pigeon_manifold","pigeon_t_mu"]],
+			["pigeon_carb_s_t_mu", ["pigeon_manifold","pigeon_t_mu"]],
+
+			["pigeon_turbo_xs_t_mu", "pigeon_t_mu"]
+
+			["pigeon_intake_pipe_xs_t_mu", ["pigeon_engine","pigeon_t_mu"]]
+		],
+
+		"nodes": [
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true},
+			{"collision":true},
+			{"nodeMaterial":"|NM_METAL"},
+			{"frictionCoef":0.5},
+			{"group":"pigeon_manifold"},
+			{"nodeWeight":0.75},
+			//exhaust attach
+			{"nodeWeight":0.75},
+			["exm1l", 0.15, -0.48, 0.31],
+	
+			//turbo
+			{"group":"pigeon_t_mu"},
+			["turbo1r", -0.020, -0.8097, 0.657],
+			["turbo1l",  0.0176, -0.8097, 0.6573],
+	
+			["turbo2r", -0.020, -0.854, 0.657],
+			["turbo2l",  0.0169, -0.854, 0.657],
+	
+			["turbo3r", -0.009, -0.810, 0.699],
+			["turbo3l",  0.0247, -0.810, 0.6979],
+	
+			{"engineGroup":"engine_intake"},
+			["turbo4r", -0.020, -0.854, 0.698],
+			["turbo4l",  0.0255, -0.854, 0.7005],
+			{"engineGroup":""},
+			{"group":""}
+		],
+
+		"props": [
+			["func",		"mesh",				"idRef:",	"idX:", "idY:", "baseRotation", "rotation", "translation", "min", "max", "offset", "multiplier"],
+			["turboSpin",	"pigeon_imp_xs_t_mu","turbo2r",	"turbo2l",	"turbo1r", {"x":90, "y":0, "z":0}, {"x":0, "y":1, "z":0}, {"x":0, "y":0, "z":0}, 0,360,0,1],
+		],
+		
+		"beams": [
+			["id1:", "id2:"],
+			{"beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			//turbo attach
+			{"beamSpring":501000,"beamDamp":100},
+			{"beamDeform":5000,"beamStrength":6100},
+			{"deformGroup":"mainEngine_intake", "deformationTriggerRatio":0.001}
+			{"breakGroup":"pigeon_turbo_t_mu"},
+			["turbo1r","e4l", {"isExhaust":"mainEngine"}],
+			["turbo1r","e3l"],
+			["turbo1r","e2l"],
+			["turbo1r","e1l"],
+	
+			["turbo1l","e4l"],
+			["turbo1l","e3l"],
+			["turbo1l","e2l"],
+			["turbo1l","e1l"],
+	
+			["turbo2r","e4l"],
+			["turbo2r","e3l"],
+			["turbo2r","e2l"],
+			["turbo2r","e1l"],
+	
+			["turbo2l","e4l"],
+			["turbo2l","e3l"],
+			["turbo2l","e2l"],
+			["turbo2l","e1l"],
+	
+			["turbo3r","e4l"],
+			["turbo3r","e3l"],
+			["turbo3r","e2l"],
+			["turbo3r","e1l"],
+	
+			["turbo3l","e4l"],
+			["turbo3l","e3l"],
+			["turbo3l","e2l"],
+			["turbo3l","e1l"],
+	
+			["turbo4r","e4l"],
+			["turbo4r","e3l"],
+			["turbo4r","e2l"],
+			["turbo4r","e1l"],
+	
+			["turbo4l","e4l"],
+			["turbo4l","e3l"],
+			["turbo4l","e2l"],
+			["turbo4l","e1l"],
+	
+			["turbo1r","e4r"],
+			["turbo1r","e2r"],
+			["turbo2r","e4r"],
+			["turbo2r","e2r"],
+	
+			//turbo structure
+			{"beamSpring":501000,"beamDamp":100},
+			{"beamDeform":35000,"beamStrength":"FLT_MAX"},
+			{"breakGroup":""},
+			["turbo3r","turbo4r"],
+			["turbo2r","turbo4l"],
+			["turbo3l","turbo4l"],
+			["turbo2r","turbo4r"],
+			["turbo3l","turbo4r"],
+			["turbo1r","turbo4l"],
+			["turbo1r","turbo2l"],
+			["turbo1l","turbo2l"],
+			["turbo2r","turbo3r"],
+			["turbo1l","turbo4l"],
+			["turbo2l","turbo4l"],
+			["turbo3l","turbo3r"],
+			["turbo1l","turbo2r"],
+			["turbo1r","turbo2r"],
+			["turbo2l","turbo2r"],
+			["turbo1r","turbo4r"],
+			["turbo1l","turbo4r"],
+			["turbo2l","turbo4r"],
+			["turbo1r","turbo3r"],
+			["turbo1l","turbo3r"],
+			["turbo2l","turbo3r"],
+			["turbo2r","turbo3l"],
+			["turbo1l","turbo3l"],
+			["turbo1l","turbo1r"],
+			["turbo3r","turbo4l"],
+			["turbo4l","turbo4r"],
+			["turbo1r","turbo3l"],
+			["turbo2l","turbo3l"],
+			
+			//exhaust attach
+			{"beamSpring":501000,"beamDamp":100},
+			{"beamDeform":5000,"beamStrength":10100},
+			{"deformGroup":"", "deformationTriggerRatio":""}
+			{"breakGroup":"pigeon_turbo_t_mu"},
+			["turbo1r","exm1l", {"isExhaust":"mainEngine"}],
+			{"breakGroup":""},
+			["exm1l","e4l"],
+			["exm1l","e3l"],
+			["exm1l", "e1l"],
+			["exm1l", "e2l"],
+	
+			{"deformGroup":"", "deformationTriggerRatio":""},
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0}
+		],
+		
+		"triangles": [
+			["id1:","id2:","id3:"],
+			["turbo4l","turbo4r","turbo2r"],
+			["turbo2r","turbo2l","turbo4l"],
+			["turbo3l","turbo4l","turbo1l"],
+			["turbo2l","turbo1l","turbo4l"],
+			["turbo2r","turbo4r","turbo1r"],
+			["turbo3r","turbo1r","turbo4r"],
+			["turbo3l","turbo1l","turbo3r"],
+			["turbo1r","turbo3r","turbo1l"],
+			["turbo4l","turbo3l","turbo3r"],
+			["turbo4r","turbo4l","turbo3r"],
+		]
+	},
+	
+	"pigeon_i3_turbo_small_t_mu": {
+		"information":{
+			"authors":"fillman86",
+			"name":"Turbo System Small",
+			"value":1200
+		},
+
+		"slotType" : "pigeon_i3_intake_t_mu"
+	
+		"turbocharger": {
+			"bovSoundFileName":"event:>Vehicle>Forced_Induction>Turbo_01>turbo_bov",
+			"hissLoopEvent":"event:>Vehicle>Forced_Induction>Turbo_01>turbo_hiss",
+			"whineLoopEvent":"event:>Vehicle>Forced_Induction>Turbo_01>turbo_spin",
+			"turboSizeCoef": 0.3,
+			"bovSoundVolumeCoef": 0.4,
+			"hissVolumePerPSI": 0.027,
+			"whineVolumePer10kRPM": 0.020,
+			"whinePitchPer10kRPM": 0.065,
+			"wastegateStart":8,
+			"wastegateLimit":9,
+			"maxExhaustPower": 3000,
+			"backPressureCoef": 0.000035,
+			"frictionCoef": 10.4,
+			"inertia":1.6,
+			"damageThresholdTemperature": 420,
+			"pressurePSI":[
+				//turbineRPM, pressure(PSI)
+				[0,         -3.5],
+				[30000,     0],
+				[60000,     8],
+				[90000,     15],
+				[150000,    20],
+				[200000,    25],
+				[250000,    43],
+				[300000,    50],
+				],
+			"engineDef":[
+				//engineRPM, efficiency, exhaustFactor
+				[0,     0.0,    0.0],
+				[650,   0.2,   0.15],
+				[1400,  0.3,   0.3],
+				[2000,  0.36,   0.4],
+				[2500,  0.6,   0.5],
+				[3000,  	1.0,   0.8],
+				[4000,		1.5,     1],
+				[5000,		2,     1],
+				[6000,		2.7,     1],
+				[7000,		3.4,     1],
+				[8000,		4.5,     1.0],
+				[9000,		5.6,     1.0],
+			],
+		},
+		"soundConfig": {
+			"$+maxLoadMix": 0.2,
+			"$+intakeMuffling":-0.2,
+			"$+mainGain":1,
+			"$+eqLowGain": 5,
+		},
+		"soundConfigExhaust": {
+			"$+maxLoadMix": 0.2,
+			"$+minLoadMix": 0.0,
+			"$+mainGain": 1,
+			"$+offLoadGain": 0.00,
+		},
+			"mainEngine": {
+			"torqueModIntake":[
+				["rpm", "torque"],
+				[0, 0],
+				[1000, -5],
+				[1500, -5],
+				[2000, -3.5],
+				[2500, -2],
+				[3000, -1],
+				[3500,  0],
+				[3500,  0],
+				[4000,  0],
+				[4500,  0],
+				[5000,  0],
+				[5500,  0],
+				[6000,  0],
+				[7000,  0],
+				[8000,  0],
+				[10000, 0],
+			],
+			//turbocharger name
+			"turbocharger":"turbocharger",
+			//"instantAfterFireCoef": 1,
+			//"sustainedAfterFireCoef": 0.75,
+			//"$*instantAfterFireCoef": 2,
+			//"$*sustainedAfterFireCoef": 2,
+	
+			//damage deformGroups
+			"deformGroups_turbo":["mainEngine_turbo"]
+		},
+	
+		"controller": [
+			["fileName"],
+			["turboGlow", {"turboStartGlow":250,"turboGlowTemp":250,"tempEndGlow":1100,"turboGlowValue":[1,2,3], "maxGlow":1}]
+		],
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["pigeon_header_t_mu", ["pigeon_engine","pigeon_t_mu"]]
+			["pigeon_dump_s_t_mu", ["pigeon_manifold","pigeon_t_mu"]],
+			["pigeon_carb_s_t_mu", ["pigeon_manifold","pigeon_t_mu"]],
+
+			["pigeon_turbo_s_t_mu", "pigeon_t_mu"]
+
+			["pigeon_intake_pipe_s_t_mu", ["pigeon_engine","pigeon_t_mu"]]
+		],
+
+		"nodes": [
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true},
+			{"collision":true},
+			{"nodeMaterial":"|NM_METAL"},
+			{"frictionCoef":0.5},
+			{"group":"pigeon_manifold"},
+			{"nodeWeight":0.75},
+			//exhaust attach
+			{"nodeWeight":0.75},
+			["exm1l", 0.15, -0.48, 0.31],
+	
+			//turbo
+			{"group":"pigeon_t_mu"},
+			["turbo1r", -0.020, -0.8097, 0.657],
+			["turbo1l",  0.0176, -0.8097, 0.6573],
+	
+			["turbo2r", -0.020, -0.854, 0.657],
+			["turbo2l",  0.0169, -0.854, 0.657],
+	
+			["turbo3r", -0.009, -0.810, 0.699],
+			["turbo3l",  0.0247, -0.810, 0.6979],
+	
+			{"engineGroup":"engine_intake"},
+			["turbo4r", -0.020, -0.854, 0.698],
+			["turbo4l",  0.0255, -0.854, 0.7005],
+			{"engineGroup":""},
+			{"group":""}
+		],
+
+		"props": [
+			["func",		"mesh",				"idRef:",	"idX:", "idY:", "baseRotation", "rotation", "translation", "min", "max", "offset", "multiplier"],
+			["turboSpin",	"pigeon_imp_s_t_mu","turbo2r",	"turbo2l",	"turbo1r", {"x":90, "y":0, "z":0}, {"x":0, "y":1, "z":0}, {"x":0, "y":0, "z":0}, 0,360,0,1],
+		],
+		
+		"beams": [
+			["id1:", "id2:"],
+			{"beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			//turbo attach
+			{"beamSpring":501000,"beamDamp":100},
+			{"beamDeform":5000,"beamStrength":6100},
+			{"deformGroup":"mainEngine_intake", "deformationTriggerRatio":0.001}
+			{"breakGroup":"pigeon_turbo_t_mu"},
+			["turbo1r","e4l", {"isExhaust":"mainEngine"}],
+			["turbo1r","e3l"],
+			["turbo1r","e2l"],
+			["turbo1r","e1l"],
+	
+			["turbo1l","e4l"],
+			["turbo1l","e3l"],
+			["turbo1l","e2l"],
+			["turbo1l","e1l"],
+	
+			["turbo2r","e4l"],
+			["turbo2r","e3l"],
+			["turbo2r","e2l"],
+			["turbo2r","e1l"],
+	
+			["turbo2l","e4l"],
+			["turbo2l","e3l"],
+			["turbo2l","e2l"],
+			["turbo2l","e1l"],
+	
+			["turbo3r","e4l"],
+			["turbo3r","e3l"],
+			["turbo3r","e2l"],
+			["turbo3r","e1l"],
+	
+			["turbo3l","e4l"],
+			["turbo3l","e3l"],
+			["turbo3l","e2l"],
+			["turbo3l","e1l"],
+	
+			["turbo4r","e4l"],
+			["turbo4r","e3l"],
+			["turbo4r","e2l"],
+			["turbo4r","e1l"],
+	
+			["turbo4l","e4l"],
+			["turbo4l","e3l"],
+			["turbo4l","e2l"],
+			["turbo4l","e1l"],
+	
+			["turbo1r","e4r"],
+			["turbo1r","e2r"],
+			["turbo2r","e4r"],
+			["turbo2r","e2r"],
+	
+			//turbo structure
+			{"beamSpring":501000,"beamDamp":100},
+			{"beamDeform":35000,"beamStrength":"FLT_MAX"},
+			{"breakGroup":""},
+			["turbo3r","turbo4r"],
+			["turbo2r","turbo4l"],
+			["turbo3l","turbo4l"],
+			["turbo2r","turbo4r"],
+			["turbo3l","turbo4r"],
+			["turbo1r","turbo4l"],
+			["turbo1r","turbo2l"],
+			["turbo1l","turbo2l"],
+			["turbo2r","turbo3r"],
+			["turbo1l","turbo4l"],
+			["turbo2l","turbo4l"],
+			["turbo3l","turbo3r"],
+			["turbo1l","turbo2r"],
+			["turbo1r","turbo2r"],
+			["turbo2l","turbo2r"],
+			["turbo1r","turbo4r"],
+			["turbo1l","turbo4r"],
+			["turbo2l","turbo4r"],
+			["turbo1r","turbo3r"],
+			["turbo1l","turbo3r"],
+			["turbo2l","turbo3r"],
+			["turbo2r","turbo3l"],
+			["turbo1l","turbo3l"],
+			["turbo1l","turbo1r"],
+			["turbo3r","turbo4l"],
+			["turbo4l","turbo4r"],
+			["turbo1r","turbo3l"],
+			["turbo2l","turbo3l"],
+			
+			//exhaust attach
+			{"beamSpring":501000,"beamDamp":100},
+			{"beamDeform":5000,"beamStrength":10100},
+			{"deformGroup":"", "deformationTriggerRatio":""}
+			{"breakGroup":"pigeon_turbo_t_mu"},
+			["turbo1r","exm1l", {"isExhaust":"mainEngine"}],
+			{"breakGroup":""},
+			["exm1l","e4l"],
+			["exm1l","e3l"],
+			["exm1l", "e1l"],
+			["exm1l", "e2l"],
+	
+			{"deformGroup":"", "deformationTriggerRatio":""},
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0}
+		],
+		
+		"triangles": [
+			["id1:","id2:","id3:"],
+			["turbo4l","turbo4r","turbo2r"],
+			["turbo2r","turbo2l","turbo4l"],
+			["turbo3l","turbo4l","turbo1l"],
+			["turbo2l","turbo1l","turbo4l"],
+			["turbo2r","turbo4r","turbo1r"],
+			["turbo3r","turbo1r","turbo4r"],
+			["turbo3l","turbo1l","turbo3r"],
+			["turbo1r","turbo3r","turbo1l"],
+			["turbo4l","turbo3l","turbo3r"],
+			["turbo4r","turbo4l","turbo3r"],
+		]
+	},
+	
+	"pigeon_i3_turbo_m_t_mu": {
+		"information":{
+			"authors":"fillman86",
+			"name":"Turbo System Medium",
+			"value":2000
+		},
+
+		"slotType" : "pigeon_i3_intake_t_mu"
+	
+		"turbocharger": {
+			"bovEnabled":false,
+			"hissLoopEvent":"event:>Vehicle>Forced_Induction>Turbo_01>turbo_hiss",
+			"whineLoopEvent":"event:>Vehicle>Forced_Induction>Turbo>Spin>turbo_spin_15",
+			"turboSizeCoef": 0.5,
+			"bovSoundVolumeCoef": 0.0,
+			"hissVolumePerPSI": 0.1,
+			"whineVolumePer10kRPM": 0.035,
+			"whinePitchPer10kRPM": 0.02,
+			"wastegateStart":15,
+			"wastegateLimit":17,
+			"maxExhaustPower": 10500,//lower numbers is more turbo lag
+			"backPressureCoef": 0.000011,
+			"pressureRatePSI": 60,
+			"frictionCoef": 25.0,
+			"inertia":6.50,
+			"damageThresholdTemperature": 700,
+			"pressurePSI":[
+				//turbineRPM, pressure(PSI)
+				[0,       -3.5],
+				[30000,    1.5],
+				[60000,      4],
+				[90000,     11],
+				[150000,    18],
+				[200000,    25],
+				[250000,    33],
+				[300000,    40]
+			],
+
+			"engineDef":[
+				//engineRPM, efficiency, exhaustFactor
+				[0,       0.0,    0.0],
+				[650,   	1,    0.0],
+				[1400,  	1,    0.0],
+				[2000,  	1,    0.0],
+				[2500,  	1,    0.01],
+				[3000,  	1,    0.05],
+				[4300,  	1.5,    0.3],
+				[5000,  	3.5,    0.9],
+				[6000,  	5,    1],
+				[8000,  	7,    1],
+			],
+		},
+		"mainEngine": {
+			//turbocharger name
+			"turbocharger":"turbocharger",
+			"$+particulates":0.25,
+			//turbocharger deform groups
+			"deformGroups_turbo":["mainEngine_turbo","mainEngine_piping"]
+		},
+	
+		"controller": [
+			["fileName"],
+			["turboGlow", {"turboStartGlow":300,"turboGlowTemp":350,"tempEndGlow":2100,"turboGlowValue":[1,2,3], "maxGlow":0.2}]
+		],
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["pigeon_header_m_t_mu", ["pigeon_engine","pigeon_t_mu"]]
+			["pigeon_dump_m_t_mu", ["pigeon_manifold","pigeon_t_mu"]],
+			["pigeon_carb_s_t_mu", ["pigeon_manifold","pigeon_t_mu"]],
+
+			["pigeon_turbo_m_t_mu", "pigeon_t_mu"]
+
+			["pigeon_intake_pipe_m_t_mu", ["pigeon_engine","pigeon_t_mu"]]
+		],
+
+		"nodes": [
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true},
+			{"collision":true},
+			{"nodeMaterial":"|NM_METAL"},
+			{"frictionCoef":0.5},
+			{"group":"pigeon_manifold"},
+			//exhaust attach
+			{"nodeWeight":2.5},
+			["exm1l", 0.15, -0.48, 0.31],
+	
+			//turbo
+			{"group":"pigeon_t_mu"},
+			["turbo1r", 0.102, -0.7876, 0.6531],
+			["turbo1l",  0.102, -0.9653, 0.6545],
+	
+			["turbo2r", -0.1552, -0.7876, 0.6531],
+			["turbo2l",  -0.1552, -0.9619, 0.6531],
+	
+			["turbo3r", 0.1005, -0.8276, 0.8662],
+			["turbo3l",  0.1005, -0.9939, 0.8364],
+	
+			{"engineGroup":"engine_intake"},
+			["turbo4r", -0.1552, -0.7916, 0.8576],
+			["turbo4l",  -0.1552, -0.9926, 0.8361],
+			{"engineGroup":""},
+			{"group":""}
+		],
+
+		"props": [
+			["func",		"mesh",				"idRef:",	"idX:", "idY:", "baseRotation", "rotation", "translation", "min", "max", "offset", "multiplier"],
+			["turboSpin",	"pigeon_imp_m_t_mu","turbo2r",	"turbo2l",	"turbo1r", {"x":90, "y":0, "z":0}, {"x":0, "y":1, "z":0}, {"x":0, "y":0, "z":0}, 0,360,0,1],
+		],
+		
+		"beams": [
+			["id1:", "id2:"],
+			{"beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			//turbo attach
+			{"beamSpring":801000,"beamDamp":100},
+			{"beamDeform":10000,"beamStrength":12100},
+			{"deformGroup":"mainEngine_intake", "deformationTriggerRatio":0.001}
+			{"breakGroup":"pigeon_turbo_t_mu"},
+			["turbo1r","e4l", {"isExhaust":"mainEngine"}],
+			["turbo1r","e3l"],
+			["turbo1r","e2l"],
+			["turbo1r","e1l"],
+	
+			["turbo1l","e4l"],
+			["turbo1l","e3l"],
+			["turbo1l","e2l"],
+			["turbo1l","e1l"],
+	
+			["turbo2r","e4l"],
+			["turbo2r","e3l"],
+			["turbo2r","e2l"],
+			["turbo2r","e1l"],
+	
+			["turbo2l","e4l"],
+			["turbo2l","e3l"],
+			["turbo2l","e2l"],
+			["turbo2l","e1l"],
+	
+			["turbo3r","e4l"],
+			["turbo3r","e3l"],
+			["turbo3r","e2l"],
+			["turbo3r","e1l"],
+	
+			["turbo3l","e4l"],
+			["turbo3l","e3l"],
+			["turbo3l","e2l"],
+			["turbo3l","e1l"],
+	
+			["turbo4r","e4l"],
+			["turbo4r","e3l"],
+			["turbo4r","e2l"],
+			["turbo4r","e1l"],
+	
+			["turbo4l","e4l"],
+			["turbo4l","e3l"],
+			["turbo4l","e2l"],
+			["turbo4l","e1l"],
+	
+			["turbo1r","e4r"],
+			["turbo1r","e2r"],
+			["turbo2r","e4r"],
+			["turbo2r","e2r"],
+	
+			//turbo structure
+			{"beamSpring":801000,"beamDamp":100},
+			{"beamDeform":35000,"beamStrength":"FLT_MAX"},
+			{"breakGroup":""},
+			["turbo3r","turbo4r"],
+			["turbo2r","turbo4l"],
+			["turbo3l","turbo4l"],
+			["turbo2r","turbo4r"],
+			["turbo3l","turbo4r"],
+			["turbo1r","turbo4l"],
+			["turbo1r","turbo2l"],
+			["turbo1l","turbo2l"],
+			["turbo2r","turbo3r"],
+			["turbo1l","turbo4l"],
+			["turbo2l","turbo4l"],
+			["turbo3l","turbo3r"],
+			["turbo1l","turbo2r"],
+			["turbo1r","turbo2r"],
+			["turbo2l","turbo2r"],
+			["turbo1r","turbo4r"],
+			["turbo1l","turbo4r"],
+			["turbo2l","turbo4r"],
+			["turbo1r","turbo3r"],
+			["turbo1l","turbo3r"],
+			["turbo2l","turbo3r"],
+			["turbo2r","turbo3l"],
+			["turbo1l","turbo3l"],
+			["turbo1l","turbo1r"],
+			["turbo3r","turbo4l"],
+			["turbo4l","turbo4r"],
+			["turbo1r","turbo3l"],
+			["turbo2l","turbo3l"],
+			
+			//exhaust attach
+			{"beamSpring":501000,"beamDamp":100},
+			{"beamDeform":9000,"beamStrength":15100},
+			{"deformGroup":"", "deformationTriggerRatio":""}
+			{"breakGroup":"pigeon_turbo_t_mu"},
+			["turbo1r","exm1l", {"isExhaust":"mainEngine"}],
+			{"breakGroup":""},
+			["exm1l","e4l"],
+			["exm1l","e3l"],
+			["exm1l", "e1l"],
+			["exm1l", "e2l"],
+	
+			{"deformGroup":"", "deformationTriggerRatio":""},
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0}
+		],
+		
+		"triangles": [
+			["id1:","id2:","id3:"],
+			["turbo4l","turbo4r","turbo2r"],
+			["turbo2r","turbo2l","turbo4l"],
+			["turbo3l","turbo4l","turbo1l"],
+			["turbo2l","turbo1l","turbo4l"],
+			["turbo2r","turbo4r","turbo1r"],
+			["turbo3r","turbo1r","turbo4r"],
+			["turbo3l","turbo1l","turbo3r"],
+			["turbo1r","turbo3r","turbo1l"],
+			["turbo4l","turbo3l","turbo3r"],
+			["turbo4r","turbo4l","turbo3r"],
+		]
+	},
+	
+	"pigeon_i3_turbo_l_t_mu": {
+		"information":{
+			"authors":"fillman86",
+			"name":"Turbo System Large",
+			"value":3000
+		},
+
+		"slotType" : "pigeon_i3_intake_t_mu"
+	
+		"slots": [
+			["type", "default", "description"],
+			["pigeon_dump_l_t_mu","pigeon_dump_l_t_mu", "Dump Pipe"],
+			["pigeon_intake_pipe_l_t_mu","pigeon_intake_pipe_l_t_mu", "Intake Pipe"]
+		],
+
+		"camerasInternal":[
+			["type", "x", "y", "z", "fov", "id1:", "id2:", "id3:", "id4:", "id5:", "id6:"],
+			{"nodeWeight":1.5},
+			{"rightHandCamera":true},
+			{"beamSpring":8000, "beamDamp":100},
+			{"selfCollision":true},
+			{"collision":true},
+			//turbo cam
+			["turbo", -0.4, -0.7, 1.02, 60, "turbo1r","turbo1l","turbo2r","turbo2l","turbo3r","turbo3l", {"beamDeform":5001000,"beamStrength":"FLT_MAX"}],
+		],
+
+		"turbocharger": {
+			"bovEnabled":false,
+			"hissLoopEvent":"event:>Vehicle>Forced_Induction>Turbo_01>turbo_hiss",
+			"whineLoopEvent":"event:>Vehicle>Forced_Induction>Turbo>Spin>turbo_spin_15",
+			"turboSizeCoef": 0.6,
+			"bovSoundVolumeCoef": 0.5,
+			"hissVolumePerPSI": 0.3,
+			"whineVolumePer10kRPM": 0.025,
+			"whinePitchPer10kRPM": 0.02,
+			"wastegateStart":27.0,
+			"wastegateLimit":27.5,
+			"maxExhaustPower": 8000,//lower numbers is more turbo lag
+			"backPressureCoef": 0.000011,
+			"pressureRatePSI": 60,
+			"frictionCoef": 25.0,
+			"inertia":8.50,
+			"damageThresholdTemperature": 700,
+			"pressurePSI":[
+				//turbineRPM, pressure(PSI)
+				[0,       -3.5],
+				[30000,    1.5],
+				[60000,      5],
+				[90000,     13],
+				[150000,    27],
+				[200000,    29],
+				[250000,    33],
+				[300000,    40]
+			],
+
+			"engineDef":[
+				//engineRPM, efficiency, exhaustFactor
+				[0,       0.0,    0.0],
+				[650,   	1,    0.0],
+				[1400,  	1,    0.0],
+				[2000,  	1,    0.0],
+				[2500,  	1,    0.0],
+				[3000,  	1,    0.1],
+				[4300,  	1,    0.1],
+				[5000,  	1.01, 0.2],
+				[6500,  	1.05, 0.3],
+				[8500,  	3,    0.6],
+				[10000,  	4,    0.8],
+				[15000,  	3,    0.7],
+				[20000,  	2,    0.5],
+				[25000,  	1.5,    0.4],
+				[28000,  	1,    4],
+			],
+		},
+		"mainEngine": {
+			//turbocharger name
+			"turbocharger":"turbocharger",
+			"$+particulates":0.25,
+			//turbocharger deform groups
+			"deformGroups_turbo":["mainEngine_turbo","mainEngine_piping"]
+		},
+	
+		"controller": [
+			["fileName"],
+			["turboGlow", {"turboStartGlow":400,"turboGlowTemp":450,"tempEndGlow":2100,"turboGlowValue":[1,2,3], "maxGlow":0.4}]
+		],
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["pigeon_header_m_t_mu", ["pigeon_engine","pigeon_t_mu"]]
+			//["pigeon_dump_l_t_mu", ["pigeon_manifold","pigeon_t_mu"]],
+			["pigeon_carb_l_t_mu", ["pigeon_manifold","pigeon_t_mu"]],
+
+			["pigeon_turbo_l_t_mu", "pigeon_t_mu"]
+
+			//["pigeon_intake_pipe_l_t_mu", ["pigeon_engine","pigeon_t_mu"]]
+		],
+
+		"nodes": [
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true},
+			{"collision":true},
+			{"nodeMaterial":"|NM_METAL"},
+			{"frictionCoef":0.5},
+			//exhaust attach
+			{"nodeWeight":2.5},
+			//turbo
+			{"group":"pigeon_t_mu"},
+			["turbo1r", 0.1507, -0.7666, 0.6503],
+			["turbo1l",  0.1507, -1.1185, 0.6503],
+	
+			["turbo2r", -0.1967, -0.7666, 0.6503],
+			["turbo2l",  -0.1967, -1.1185, 0.6503],
+	
+			["turbo3r", 0.148, -0.7666, 0.8965],
+			["turbo3l",  0.148, -1.148, 0.8831],
+	
+			["turbo4r", -0.1967, -0.7666, 0.8965],
+			["turbo4l",  -0.2521, -1.148, 0.8831],
+
+        	["turbo6r", 0.0802, -0.8749, 1.0386],
+        	["turbo6l", 0.0802, -1.0808, 1.0157],
+        	["turbo5r", -0.2094, -0.8749, 1.0386],
+        	["turbo5l", -0.2094, -1.0808, 1.0157],
+        	["turboexh", 0.148, -0.9593, 0.957],
+
+			{"engineGroup":"engine_intake"},
+        	["turboin", -0.2833, -0.9593, 0.9542],
+			{"engineGroup":""},
+
+			{"group":""}
+		],
+
+		"props": [
+			["func",		"mesh",				"idRef:",	"idX:", "idY:", "baseRotation", "rotation", "translation", "min", "max", "offset", "multiplier"],
+			["turboSpin",	"pigeon_imp_l_t_mu","turbo2r",	"turbo2l",	"turbo1r", {"x":90, "y":0, "z":0}, {"x":0, "y":1, "z":0}, {"x":0, "y":0, "z":0}, 0,360,0,1],
+		],
+		
+		"beams": [
+			["id1:", "id2:"],
+			{"beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			//turbo attach
+			{"beamSpring":801000,"beamDamp":100},
+			{"beamDeform":10000,"beamStrength":12100},
+			{"deformGroup":["mainEngine_turbo","mainEngine_intake"], "deformationTriggerRatio":0.001}
+			{"breakGroup":"pigeon_turbo_t_mu"},
+			["turbo1r","e4l"],
+			["turbo1r","e3l"],
+			["turbo1r","e2l"],
+			["turbo1r","e1l"],
+	
+			["turbo1l","e4l"],
+			["turbo1l","e3l"],
+			["turbo1l","e2l"],
+			["turbo1l","e1l"],
+	
+			["turbo2r","e4l"],
+			["turbo2r","e3l"],
+			["turbo2r","e2l"],
+			["turbo2r","e1l"],
+	
+			["turbo2l","e4l"],
+			["turbo2l","e3l"],
+			["turbo2l","e2l"],
+			["turbo2l","e1l"],
+	
+			["turbo3r","e4l"],
+			["turbo3r","e3l"],
+			["turbo3r","e2l"],
+			["turbo3r","e1l"],
+	
+			["turbo3l","e4l"],
+			["turbo3l","e3l"],
+			["turbo3l","e2l"],
+			["turbo3l","e1l"],
+	
+			["turbo4r","e4l"],
+			["turbo4r","e3l"],
+			["turbo4r","e2l"],
+			["turbo4r","e1l"],
+	
+			["turbo4l","e4l"],
+			["turbo4l","e3l"],
+			["turbo4l","e2l"],
+			["turbo4l","e1l"],
+	
+			["turbo1r","e4r"],
+			["turbo1r","e2r"],
+			["turbo2r","e4r"],
+			["turbo2r","e2r"],
+	
+			["turboin","e4l", {"isExhaust":"mainEngine"}],
+
+			//turbo structure
+			{"beamSpring":801000,"beamDamp":100},
+			{"beamDeform":35000,"beamStrength":"FLT_MAX"},
+			{"breakGroup":""},
+			["turboin","turboexh", {"isExhaust":"mainEngine"}],
+
+			["turbo3r","turbo4r"],
+			["turbo2r","turbo4l"],
+			["turbo3l","turbo4l"],
+			["turbo2r","turbo4r"],
+			["turbo3l","turbo4r"],
+			["turbo1r","turbo4l"],
+			["turbo1r","turbo2l"],
+			["turbo1l","turbo2l"],
+			["turbo2r","turbo3r"],
+			["turbo1l","turbo4l"],
+			["turbo2l","turbo4l"],
+			["turbo3l","turbo3r"],
+			["turbo1l","turbo2r"],
+			["turbo1r","turbo2r"],
+			["turbo2l","turbo2r"],
+			["turbo1r","turbo4r"],
+			["turbo1l","turbo4r"],
+			["turbo2l","turbo4r"],
+			["turbo1r","turbo3r"],
+			["turbo1l","turbo3r"],
+			["turbo2l","turbo3r"],
+			["turbo2r","turbo3l"],
+			["turbo1l","turbo3l"],
+			["turbo1l","turbo1r"],
+			["turbo3r","turbo4l"],
+			["turbo4l","turbo4r"],
+			["turbo1r","turbo3l"],
+			["turbo2l","turbo3l"],
+			
+        	["turbo5l","turbo6r"],
+        	["turbo5r","turbo6r"],
+        	["turbo6l","turbo6r"],
+        	["turbo5r","turbo6l"],
+        	["turbo5r","turbo4r"],
+        	["turbo6r","turbo3r"],
+        	["turbo5r","turbo5l"],
+        	["turbo5l","turbo4l"],
+        	["turbo6l","turbo3l"],
+        	["turbo6l","turbo5l"],
+        	["turboexh","turbo6l"],
+        	["turboin","turbo5l"],
+        	["turbo6r","turbo4r"],
+        	["turboin","turbo1l"],
+        	["turboin","turbo2l"],
+        	["turbo5r","turbo4l"],
+        	["turbo6l","turbo1r"],
+        	["turbo5l","turbo2r"],
+        	["turboin","turbo3r"],
+        	["turbo5l","turbo4r"],
+        	["turboexh","turbo6r"],
+        	["turbo5l","turbo3l"],
+        	["turboexh","turbo2r"],
+        	["turboin","turbo4l"],
+        	["turboexh","turbo4r"],
+        	["turbo5r","turboin"],
+        	["turbo6r","turbo2l"],
+        	["turbo5r","turbo1r"],
+        	["turboexh","turbo3l"],
+        	["turbo6r","turbo1l"],
+        	["turboexh","turbo5l"],
+        	["turbo6l","turbo2r"],
+        	["turbo6l","turbo4r"],
+        	["turbo5r","turboexh"],
+        	["turboin","turbo1r"],
+        	["turbo5l","turbo1l"],
+        	["turbo5l","turbo2l"],
+        	["turboin","turbo6l"],
+        	["turbo5r","turbo2r"],
+        	["turbo6r","turbo4l"],
+        	["turboexh","turbo1l"],
+        	["turboexh","turbo2l"],
+        	["turbo5l","turbo3r"],
+        	["turboin","turbo6r"],
+        	["turboexh","turbo3r"],
+        	["turbo5r","turbo3l"],
+        	["turboin","turbo2r"],
+        	["turbo6r","turbo1r"],
+        	["turbo6l","turbo1l"],
+        	["turboin","turbo4r"],
+        	["turbo6l","turbo2l"],
+        	["turboexh","turbo4l"],
+        	["turboin","turbo3l"],
+        	["turbo6l","turbo3r"],
+        	["turbo5l","turbo1r"],
+        	["turboexh","turbo1r"],
+        	["turbo5r","turbo1l"],
+        	["turbo5r","turbo2l"],
+        	["turbo6l","turbo4l"],
+        	["turbo6r","turbo2r"],
+        	["turbo5r","turbo3r"],
+        	["turbo6r","turbo3l"],
+
+			//exhaust attach
+			{"beamSpring":501000,"beamDamp":100},
+			{"beamDeform":9000,"beamStrength":15100},
+			{"deformGroup":"", "deformationTriggerRatio":""}
+			{"breakGroup":"pigeon_turbo_t_mu"},
+			["turbo1r","exm1l", {"isExhaust":"mainEngine"}],
+			{"breakGroup":""},
+			["exm1l","e4l"],
+			["exm1l","e3l"],
+			["exm1l", "e1l"],
+			["exm1l", "e2l"],
+	
+			{"deformGroup":"", "deformationTriggerRatio":""},
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0}
+		],
+		
+		"triangles": [
+			["id1:","id2:","id3:"],
+        	["turbo5l","turboin","turbo4l"],
+        	["turbo5l","turbo5r","turboin"],
+        	["turbo4r","turboin","turbo5r"],
+        	["turbo2r","turboin","turbo4r"],
+        	["turbo2l","turboin","turbo2r"],
+        	["turbo2l","turbo4l","turboin"],
+        	["turbo2l","turbo1l","turbo4l"],
+        	["turbo3l","turbo4l","turbo1l"],
+        	["turbo3l","turbo5l","turbo4l"],
+        	["turbo3l","turbo6l","turbo5l"],
+        	["turbo5l","turbo6l","turbo6r"],
+        	["turbo5l","turbo6r","turbo5r"],
+        	["turbo6r","turbo3r","turbo5r"],
+        	["turbo3r","turbo4r","turbo5r"],
+        	["turbo3r","turbo1r","turbo4r"],
+        	["turbo2r","turbo4r","turbo1r"],
+        	["turbo2l","turbo2r","turbo1r"],
+        	["turbo1r","turbo1l","turbo2l"],
+        	["turbo6r","turboexh","turbo3r"],
+        	["turbo6l","turboexh","turbo6r"],
+        	["turbo6l","turbo3l","turboexh"],
+        	["turbo3l","turbo3r","turboexh"],
+        	["turbo1r","turbo3r","turbo1l"],
+        	["turbo3l","turbo1l","turbo3r"],
+		]
+	},
+	
+	"pigeon_i3_turbo_xl_t_mu": {
+		"information":{
+			"authors":"fillman86",
+			"name":"Turbo System XL",
+			"value":12000
+		},
+
+		"slotType" : "pigeon_i3_intake_t_mu"
+	
+		"slots": [
+			["type", "default", "description"],
+			//["pigeon_dump_xl_t_mu","pigeon_dump_xl_t_mu", "Dump Pipe"]
+			["pigeon_intake_pipe_xl_t_mu","pigeon_intake_pipe_xl_t_mu", "Intake Pipe"]
+		],
+
+		"camerasInternal":[
+			["type", "x", "y", "z", "fov", "id1:", "id2:", "id3:", "id4:", "id5:", "id6:"],
+			{"nodeWeight":1.5},
+			{"rightHandCamera":true},
+			{"beamSpring":8000, "beamDamp":100},
+			{"selfCollision":true},
+			{"collision":true},
+			//turbo cam
+			["turbo", -0.4, -0.7, 1.02, 60, "turbo1r","turbo1l","turbo2r","turbo2l","turbo3r","turbo3l", {"beamDeform":5001000,"beamStrength":"FLT_MAX"}],
+		],
+
+		"turbocharger": {
+			"bovEnabled":false,
+			"hissLoopEvent":"event:>Vehicle>Forced_Induction>Turbo_semi_01>turbo_hiss_race",
+			"whineLoopEvent":"event:>Vehicle>Forced_Induction>Turbo_semi_01>turbo_spin_race",
+			"turboSizeCoef": 0.7,
+			"bovSoundVolumeCoef": 10.5,
+			"hissVolumePerPSI": 0.4,
+			"whineVolumePer10kRPM": 0.7,
+			"whinePitchPer10kRPM": 0.04,
+			"wastegateStart":40.0,
+			"wastegateLimit":41,
+			"maxExhaustPower": 6000,//lower numbers is more turbo lag
+			"backPressureCoef": 0.000011,
+			"pressureRatePSI": 60,
+			"frictionCoef": 25.0,
+			"inertia":16.50,
+			"damageThresholdTemperature": 700,
+			"pressurePSI":[
+				//turbineRPM, pressure(PSI)
+				[0,       -3.5],
+				[30000,    1.5],
+				[60000,      7],
+				[90000,     30],
+				[150000,    48],
+				[200000,    55],
+				[250000,    60],
+				[300000,    61]
+			],
+
+			"engineDef":[
+				//engineRPM, efficiency, exhaustFactor
+				[0,       0.0,    0.0],
+				[650,   	0.1,    0.0],
+				[1400,  	0.1,    0.0],
+				[2000,  	0.1,    0.0],
+				[2500,  	0.2,    0.0],
+				[3000,  	0.2,    0.1],
+				[4300,  	0.2,    0.1],
+				[5000,  	0.2,  0.1],
+				[6000,  	0.2,    0.2],
+				[8000,  	0.3,    0.3],
+				[10000,  	1.5,      1],
+				[12000,  	3,      1],
+				[15000,  	3,    0.8],
+				[20000,  	1.8,    0.7],
+				[25000,  	1,    0.5],
+				[28000,  	0.5,    0.1],
+			],
+		},
+		"mainEngine": {
+			//turbocharger name
+			"turbocharger":"turbocharger",
+			"$+particulates":0.25,
+			//turbocharger deform groups
+			"deformGroups_turbo":["mainEngine_turbo","mainEngine_piping"]
+		},
+	
+		"controller": [
+			["fileName"],
+			["turboGlow", {"turboStartGlow":400,"turboGlowTemp":450,"tempEndGlow":2100,"turboGlowValue":[1,2,3], "maxGlow":0.8}]
+		],
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["pigeon_header_xl_t_mu", ["pigeon_engine","pigeon_t_mu"]]
+			//["pigeon_dump_l_t_mu", ["pigeon_manifold","pigeon_t_mu"]],
+			["pigeon_carb_l_t_mu", ["pigeon_manifold","pigeon_t_mu"]],
+
+			["pigeon_turbo_xl_t_mu", "pigeon_t_mu"]
+
+			//["pigeon_intake_pipe_l_t_mu", ["pigeon_engine","pigeon_t_mu"]]
+		],
+
+		"nodes": [
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true},
+			{"collision":true},
+			{"nodeMaterial":"|NM_METAL"},
+			{"frictionCoef":0.5},
+			//exhaust attach
+			{"nodeWeight":10},
+			//turbo
+			{"group":"pigeon_t_mu"},
+			["turbo1r", -0.2091, -0.8056, 0.6635],
+			["turbo1l",  0.3116, -0.8471, 0.6635],
+	
+			["turbo2r", -0.2091, -1.7281, 0.6635],
+			["turbo2l",  0.4324, -1.7281, 0.6635],
+	
+			["turbo3r", -0.2153, -0.8106, 1.1401],
+			["turbo3l",  0.4733, -0.9088, 0.9276],
+	
+			["turbo4r", -0.2091, -1.7281, 1.5033],
+			["turbo4l",  0.6237, -1.6666, 0.9276],
+
+        	["turbo6r", 0.0919, -0.8984, 1.3842],
+        	["turbo6l", 0.4992, -0.9363, 1.31],
+        	["turbo5r", 0.2398, -1.7098, 1.4746],
+        	["turbo5l", 0.4992, -1.6969, 1.31],
+        	["turboexh", 0.1706, -0.8189, 1.0327],
+
+			{"engineGroup":"engine_intake"},
+        	["turboin", 0.1706, -1.8886, 1.0275],
+			{"engineGroup":""},
+
+			{"group":""}
+		],
+
+		"props": [
+			["func",		"mesh",				"idRef:",	"idX:", "idY:", "baseRotation", "rotation", "translation", "min", "max", "offset", "multiplier"],
+			["turboSpin",	"pigeon_imp_xl_t_mu","turbo2r",	"turbo2l",	"turbo1r", {"x":90, "y":0, "z":0}, {"x":0, "y":-1, "z":0}, {"x":0, "y":0, "z":0}, 0,360,0,1],
+		],
+		
+		"beams": [
+			["id1:", "id2:"],
+			{"beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			//turbo attach
+			{"beamSpring":1801000,"beamDamp":150},
+			{"beamDeform":10000,"beamStrength":12100},
+			{"deformGroup":["mainEngine_turbo","mainEngine_intake"], "deformationTriggerRatio":0.001}
+			{"breakGroup":"pigeon_turbo_t_mu"},
+			["turbo1r","e4l"],
+			["turbo1r","e3l"],
+			["turbo1r","e2l"],
+			["turbo1r","e1l"],
+	
+			["turbo1l","e4l"],
+			["turbo1l","e3l"],
+			["turbo1l","e2l"],
+			["turbo1l","e1l"],
+	
+			["turbo2r","e4l"],
+			["turbo2r","e3l"],
+			["turbo2r","e2l"],
+			["turbo2r","e1l"],
+	
+			["turbo2l","e4l"],
+			["turbo2l","e3l"],
+			["turbo2l","e2l"],
+			["turbo2l","e1l"],
+	
+			["turbo3r","e4l"],
+			["turbo3r","e3l"],
+			["turbo3r","e2l"],
+			["turbo3r","e1l"],
+	
+			["turbo3l","e4l"],
+			["turbo3l","e3l"],
+			["turbo3l","e2l"],
+			["turbo3l","e1l"],
+	
+			["turbo4r","e4l"],
+			["turbo4r","e3l"],
+			["turbo4r","e2l"],
+			["turbo4r","e1l"],
+	
+			["turbo4l","e4l"],
+			["turbo4l","e3l"],
+			["turbo4l","e2l"],
+			["turbo4l","e1l"],
+	
+			["turbo1r","e4r"],
+			["turbo1r","e2r"],
+			["turbo2r","e4r"],
+			["turbo2r","e2r"],
+	
+			["turboin","e4l", {"isExhaust":"mainEngine"}],
+
+			//turbo structure
+			{"beamSpring":2801000,"beamDamp":200},
+			{"beamDeform":35000,"beamStrength":"FLT_MAX"},
+			{"breakGroup":""},
+			["turboin","turboexh", {"isExhaust":"mainEngine"}],
+
+			["turbo3r","turbo4r"],
+			["turbo2r","turbo4l"],
+			["turbo3l","turbo4l"],
+			["turbo2r","turbo4r"],
+			["turbo3l","turbo4r"],
+			["turbo1r","turbo4l"],
+			["turbo1r","turbo2l"],
+			["turbo1l","turbo2l"],
+			["turbo2r","turbo3r"],
+			["turbo1l","turbo4l"],
+			["turbo2l","turbo4l"],
+			["turbo3l","turbo3r"],
+			["turbo1l","turbo2r"],
+			["turbo1r","turbo2r"],
+			["turbo2l","turbo2r"],
+			["turbo1r","turbo4r"],
+			["turbo1l","turbo4r"],
+			["turbo2l","turbo4r"],
+			["turbo1r","turbo3r"],
+			["turbo1l","turbo3r"],
+			["turbo2l","turbo3r"],
+			["turbo2r","turbo3l"],
+			["turbo1l","turbo3l"],
+			["turbo1l","turbo1r"],
+			["turbo3r","turbo4l"],
+			["turbo4l","turbo4r"],
+			["turbo1r","turbo3l"],
+			["turbo2l","turbo3l"],
+			
+        	["turbo5l","turbo6r"],
+        	["turbo5r","turbo6r"],
+        	["turbo6l","turbo6r"],
+        	["turbo5r","turbo6l"],
+        	["turbo5r","turbo4r"],
+        	["turbo6r","turbo3r"],
+        	["turbo5r","turbo5l"],
+        	["turbo5l","turbo4l"],
+        	["turbo6l","turbo3l"],
+        	["turbo6l","turbo5l"],
+        	["turboexh","turbo6l"],
+        	["turboin","turbo5l"],
+        	["turbo6r","turbo4r"],
+        	["turboin","turbo1l"],
+        	["turboin","turbo2l"],
+        	["turbo5r","turbo4l"],
+        	["turbo6l","turbo1r"],
+        	["turbo5l","turbo2r"],
+        	["turboin","turbo3r"],
+        	["turbo5l","turbo4r"],
+        	["turboexh","turbo6r"],
+        	["turbo5l","turbo3l"],
+        	["turboexh","turbo2r"],
+        	["turboin","turbo4l"],
+        	["turboexh","turbo4r"],
+        	["turbo5r","turboin"],
+        	["turbo6r","turbo2l"],
+        	["turbo5r","turbo1r"],
+        	["turboexh","turbo3l"],
+        	["turbo6r","turbo1l"],
+        	["turboexh","turbo5l"],
+        	["turbo6l","turbo2r"],
+        	["turbo6l","turbo4r"],
+        	["turbo5r","turboexh"],
+        	["turboin","turbo1r"],
+        	["turbo5l","turbo1l"],
+        	["turbo5l","turbo2l"],
+        	["turboin","turbo6l"],
+        	["turbo5r","turbo2r"],
+        	["turbo6r","turbo4l"],
+        	["turboexh","turbo1l"],
+        	["turboexh","turbo2l"],
+        	["turbo5l","turbo3r"],
+        	["turboin","turbo6r"],
+        	["turboexh","turbo3r"],
+        	["turbo5r","turbo3l"],
+        	["turboin","turbo2r"],
+        	["turbo6r","turbo1r"],
+        	["turbo6l","turbo1l"],
+        	["turboin","turbo4r"],
+        	["turbo6l","turbo2l"],
+        	["turboexh","turbo4l"],
+        	["turboin","turbo3l"],
+        	["turbo6l","turbo3r"],
+        	["turbo5l","turbo1r"],
+        	["turboexh","turbo1r"],
+        	["turbo5r","turbo1l"],
+        	["turbo5r","turbo2l"],
+        	["turbo6l","turbo4l"],
+        	["turbo6r","turbo2r"],
+        	["turbo5r","turbo3r"],
+        	["turbo6r","turbo3l"],
+
+			{"breakGroup":""},
+			{"deformGroup":"", "deformationTriggerRatio":""},
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0}
+		],
+		
+		"triangles": [
+			["id1:","id2:","id3:"],
+            {"dragCoef":34},
+        	["turbo5l","turboin","turbo4l"],
+        	["turbo5l","turbo5r","turboin"],
+        	["turbo4r","turboin","turbo5r"],
+        	["turbo2r","turboin","turbo4r"],
+        	["turbo2l","turboin","turbo2r"],
+        	["turbo2l","turbo4l","turboin"],
+
+            {"dragCoef":1},
+        	["turbo3l","turbo5l","turbo4l"],
+        	["turbo3l","turbo6l","turbo5l"],
+        	["turbo5l","turbo6l","turbo6r"],
+        	["turbo5l","turbo6r","turbo5r"],
+        	["turbo1r","turbo3r","turbo1l"],
+        	["turbo3l","turbo1l","turbo3r"],
+        	["turbo3r","turbo2r","turbo4r"],
+        	["turbo5r","turbo6r","turbo4r"],
+        	["turbo4r","turbo6r","turbo3r"],
+
+			{"dragCoef":54},
+        	["turbo6r","turboexh","turbo3r"],
+        	["turbo6l","turboexh","turbo6r"],
+        	["turbo6l","turbo3l","turboexh"],
+        	["turbo3l","turbo3r","turboexh"],
+		]
+	},
+
+	"pigeon_i3_turbo_xxl_t_mu": {
+		"information":{
+			"authors":"fillman86",
+			"name":"Turbo System XXL",
+			"value":200000
+		},
+
+		"slotType" : "pigeon_i3_intake_t_mu"
+	
+		"slots": [
+			["type", "default", "description"],
+			["pigeon_intake_pipe_xxl_t_mu","pigeon_intake_pipe_xxl_t_mu", "Intake Pipe"]
+		],
+
+		"camerasInternal":[
+			["type", "x", "y", "z", "fov", "id1:", "id2:", "id3:", "id4:", "id5:", "id6:"],
+			{"nodeWeight":1.5},
+			{"rightHandCamera":true},
+			{"beamSpring":8000, "beamDamp":100},
+			{"selfCollision":true},
+			{"collision":true},
+			//turbo cam
+			["turbo", -0.4, -0.7, 1.02, 60, "turbo1r","turbo1l","turbo2r","turbo2l","turbo3r","turbo3l", {"beamDeform":5001000,"beamStrength":"FLT_MAX"}],
+		],
+
+		"turbocharger": {
+			"bovEnabled":false,
+			"hissLoopEvent":"event:>Vehicle>Forced_Induction>Turbo_semi_01>turbo_hiss_race",
+			"whineLoopEvent":"event:>Vehicle>Forced_Induction>Turbo_semi_01>turbo_spin_race",
+			"turboSizeCoef": 0.9,
+			"bovSoundVolumeCoef": 10.5,
+			"hissVolumePerPSI": 1,
+			"whineVolumePer10kRPM": 1,
+			"whinePitchPer10kRPM": 0.04,
+			"wastegateStart":69,
+			"wastegateLimit":69.5,
+			"maxExhaustPower": 5000,//lower numbers is more turbo lag
+			"backPressureCoef": 0.000011,
+			"pressureRatePSI": 60,
+			"frictionCoef": 25.0,
+			"inertia":16.50,
+			"damageThresholdTemperature": 700,
+			"pressurePSI":[
+				//turbineRPM, pressure(PSI)
+				[0,       -3.5],
+				[30000,    15],
+				[60000,      30],
+				[90000,     45],
+				[150000,    90],
+				[200000,    94],
+				[250000,    96],
+				[300000,    97]
+			],
+
+			"engineDef":[
+				//engineRPM, efficiency, exhaustFactor
+				[0,       0.0,		0.0],
+				[650,   	1,		0.0],
+				[1400,  	1,		0.01],
+				[2000,  	1,		0.01],
+				[2500,  	1,		0.05],
+				[3000,  	1,		0.06],
+				[4300,  	1,		0.07],
+				[5000,  	1,  	0.08],
+				[6000,  	1,		0.09],
+				[8000,  	1,		0.13],
+				[12000,  	1.2,	0.2],
+				[16000,  	2.1,	0.65],
+				[18000,  	2.5,	0.85],
+				[20000,  	3,		0.8],
+				[25000,  	3,		0.8],
+				[28000,  	2,		1],
+			],
+		},
+		"mainEngine": {
+			//turbocharger name
+			"turbocharger":"turbocharger",
+			"$+particulates":0.25,
+			//turbocharger deform groups
+			"deformGroups_turbo":["mainEngine_turbo","mainEngine_piping"]
+		},
+	
+		"controller": [
+			["fileName"],
+			["turboGlow", {"turboStartGlow":300,"turboGlowTemp":350,"tempEndGlow":2100,"turboGlowValue":[1,2,3], "maxGlow":0.2}]
+		],
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["pigeon_na_header_t_mu", ["pigeon_engine","pigeon_t_mu"]]
+			["pigeon_carb_l_t_mu", ["pigeon_manifold","pigeon_t_mu"]],
+
+			["pigeon_turbo_xxl_t_mu", "pigeon_t_mu"]
+
+		],
+
+		"nodes": [
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true},
+			{"collision":true},
+			{"nodeMaterial":"|NM_METAL"},
+			{"frictionCoef":0.5},
+
+			{"group":"pigeon_manifold"},
+			//exhaust attach
+			{"nodeWeight":2.5},
+			["exm1l", 0.15, -0.48, 0.31],
+
+			{"nodeWeight":10},
+			//turbo
+			{"group":"pigeon_t_mu"},
+			["turbo1r", -0.1704, 1.4452,  0.5835],
+			["turbo1l",  0.2692, 1.6886, 0.7739],
+	
+			["turbo2r", -0.1704, 0.4789, 0.5835],
+			["turbo2l",  0.548, 0.4789, 1.437],
+	
+			["turbo3r", -0.4232, 1.6748, 1.1995],
+			["turbo3l",  0.7316, 1.6104, 1.1267],
+	
+			["turbo4r", -0.8792, 0.4789, 1.18],
+			["turbo4l",  0.4388, 0.5678, 0.8439],
+
+        	["turbo6r", -0.2925, 1.6797, 1.5778],
+        	["turbo6l",  0.2162, 1.6659, 1.5344],
+        	["turbo5r", -0.41,   0.5888, 1.7332],
+        	["turbo5l",  0.2498, 0.6055, 1.7622],
+        	["turboexh",-0.0222, 1.2136, 1.0841],
+
+			{"engineGroup":"engine_intake"},
+        	["turboin", -0.0222, 0.394,  1.0841],
+			{"engineGroup":""},
+
+			{"group":""}
+		],
+
+		"props": [
+			["func",		"mesh",				"idRef:",	"idX:", "idY:", "baseRotation", "rotation", "translation", "min", "max", "offset", "multiplier"],
+			["turboSpin",	"pigeon_imp_xxl_t_mu","turbo2r",	"turbo2l",	"turbo1r", {"x":90, "y":0, "z":0}, {"x":0, "y":-1, "z":0}, {"x":0, "y":0, "z":0}, 0,360,0,1],
+		],
+		
+		"beams": [
+			["id1:", "id2:"],
+			{"beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			//turbo attach
+			{"beamSpring":1801000,"beamDamp":150},
+			{"beamDeform":10000,"beamStrength":12100},
+			{"deformGroup":["mainEngine_turbo","mainEngine_intake"], "deformationTriggerRatio":0.001}
+			{"breakGroup":"pigeon_turbo_t_mu"},
+			["turbo1r","e4l"],
+			["turbo1r","e3l"],
+			["turbo1r","e2l"],
+			["turbo1r","e1l"],
+	
+			["turbo1l","e4l"],
+			["turbo1l","e3l"],
+			["turbo1l","e2l"],
+			["turbo1l","e1l"],
+	
+			["turbo2r","e4l"],
+			["turbo2r","e3l"],
+			["turbo2r","e2l"],
+			["turbo2r","e1l"],
+	
+			["turbo2l","e4l"],
+			["turbo2l","e3l"],
+			["turbo2l","e2l"],
+			["turbo2l","e1l"],
+	
+			["turbo3r","e4l"],
+			["turbo3r","e3l"],
+			["turbo3r","e2l"],
+			["turbo3r","e1l"],
+	
+			["turbo3l","e4l"],
+			["turbo3l","e3l"],
+			["turbo3l","e2l"],
+			["turbo3l","e1l"],
+	
+			["turbo4r","e4l"],
+			["turbo4r","e3l"],
+			["turbo4r","e2l"],
+			["turbo4r","e1l"],
+	
+			["turbo4l","e4l"],
+			["turbo4l","e3l"],
+			["turbo4l","e2l"],
+			["turbo4l","e1l"],
+	
+			["turbo1r","e4r"],
+			["turbo1r","e2r"],
+			["turbo2r","e4r"],
+			["turbo2r","e2r"],
+			["turboin","e4l"],
+
+			//turbo structure
+			{"beamSpring":2801000,"beamDamp":200},
+			{"beamDeform":35000,"beamStrength":"FLT_MAX"},
+			{"breakGroup":""},
+			["turbo3l","turboin",	{"isExhaust":"mainEngine"}],
+			["turboin","turboexh",	{"isExhaust":"mainEngine"}],
+
+			["turbo3r","turbo4r"],
+			["turbo2r","turbo4l"],
+			["turbo3l","turbo4l"],
+			["turbo2r","turbo4r"],
+			["turbo3l","turbo4r"],
+			["turbo1r","turbo4l"],
+			["turbo1r","turbo2l"],
+			["turbo1l","turbo2l"],
+			["turbo2r","turbo3r"],
+			["turbo1l","turbo4l"],
+			["turbo2l","turbo4l"],
+			["turbo3l","turbo3r"],
+			["turbo1l","turbo2r"],
+			["turbo1r","turbo2r"],
+			["turbo2l","turbo2r"],
+			["turbo1r","turbo4r"],
+			["turbo1l","turbo4r"],
+			["turbo2l","turbo4r"],
+			["turbo1r","turbo3r"],
+			["turbo1l","turbo3r"],
+			["turbo2l","turbo3r"],
+			["turbo2r","turbo3l"],
+			["turbo1l","turbo3l"],
+			["turbo1l","turbo1r"],
+			["turbo3r","turbo4l"],
+			["turbo4l","turbo4r"],
+			["turbo1r","turbo3l"],
+			["turbo2l","turbo3l"],
+			
+        	["turbo5l","turbo6r"],
+        	["turbo5r","turbo6r"],
+        	["turbo6l","turbo6r"],
+        	["turbo5r","turbo6l"],
+        	["turbo5r","turbo4r"],
+        	["turbo6r","turbo3r"],
+        	["turbo5r","turbo5l"],
+        	["turbo5l","turbo4l"],
+        	["turbo6l","turbo3l"],
+        	["turbo6l","turbo5l"],
+        	["turboexh","turbo6l"],
+        	["turboin","turbo5l"],
+        	["turbo6r","turbo4r"],
+        	["turboin","turbo1l"],
+        	["turboin","turbo2l"],
+        	["turbo5r","turbo4l"],
+        	["turbo6l","turbo1r"],
+        	["turbo5l","turbo2r"],
+        	["turboin","turbo3r"],
+        	["turbo5l","turbo4r"],
+        	["turboexh","turbo6r"],
+        	["turbo5l","turbo3l"],
+        	["turboexh","turbo2r"],
+        	["turboin","turbo4l"],
+        	["turboexh","turbo4r"],
+        	["turbo5r","turboin"],
+        	["turbo6r","turbo2l"],
+        	["turbo5r","turbo1r"],
+        	["turboexh","turbo3l"],
+        	["turbo6r","turbo1l"],
+        	["turboexh","turbo5l"],
+        	["turbo6l","turbo2r"],
+        	["turbo6l","turbo4r"],
+        	["turbo5r","turboexh"],
+        	["turboin","turbo1r"],
+        	["turbo5l","turbo1l"],
+        	["turbo5l","turbo2l"],
+        	["turboin","turbo6l"],
+        	["turbo5r","turbo2r"],
+        	["turbo6r","turbo4l"],
+        	["turboexh","turbo1l"],
+        	["turboexh","turbo2l"],
+        	["turbo5l","turbo3r"],
+        	["turboin","turbo6r"],
+        	["turboexh","turbo3r"],
+        	["turbo5r","turbo3l"],
+        	["turboin","turbo2r"],
+        	["turbo6r","turbo1r"],
+        	["turbo6l","turbo1l"],
+        	["turboin","turbo4r"],
+        	["turbo6l","turbo2l"],
+        	["turboexh","turbo4l"],
+        	["turbo6l","turbo3r"],
+        	["turbo5l","turbo1r"],
+        	["turboexh","turbo1r"],
+        	["turbo5r","turbo1l"],
+        	["turbo5r","turbo2l"],
+        	["turbo6l","turbo4l"],
+        	["turbo6r","turbo2r"],
+        	["turbo5r","turbo3r"],
+        	["turbo6r","turbo3l"],
+
+			{"breakGroup":""},
+			//exhaust attach
+			{"beamSpring":501000,"beamDamp":100},
+			{"beamDeform":9000,"beamStrength":"FLT_MAX"},
+			{"deformGroup":"", "deformationTriggerRatio":""}
+			["e4l","exm1l", {"isExhaust":"mainEngine"}],
+			{"breakGroup":""},
+			//["exm1l","e4l"],
+			["exm1l","e3l"],
+			["exm1l", "e1l"],
+			["exm1l", "e2l"],
+	
+			{"deformGroup":"", "deformationTriggerRatio":""},
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0}
+		],
+		
+		"triangles": [
+			["id1:","id2:","id3:"],
+            {"dragCoef":10},
+			["turbo5l","turboin","turbo2l"],
+			["turbo5r","turboin","turbo5l"],
+			["turbo5r","turbo4r","turboin"],
+			["turbo4r","turbo2r","turboin"],
+			["turbo4l","turboin","turbo2r"],
+			["turbo4l","turbo2l","turboin"],
+			["turbo4r","turbo5r","turbo3r"],
+			["turbo5r","turbo6r","turbo3r"],
+			["turbo6r","turbo5r","turbo5l"],
+			["turbo6r","turbo5l","turbo6l"],
+			["turbo6l","turbo5l","turbo3l"],
+			["turbo3l","turbo5l","turbo2l"],
+			["turbo3l","turbo2l","turbo4l"],
+			["turbo3l","turbo4l","turbo1l"],
+			["turbo1r","turbo1l","turbo4l"],
+			["turbo2r","turbo1r","turbo4l"],
+			["turbo2r","turbo4r","turbo1r"],
+			["turbo3r","turbo1r","turbo4r"],
+			["turbo6l","turbo3l","turbo6r"],
+			["turbo3r","turbo6r","turbo3l"],
+			["turbo3l","turbo1l","turbo3r"],
+			["turbo1r","turbo3r","turbo1l"],
+			{"dragCoef":1}
+		]
+	},
+
+	"pigeon_i3_turbo_xxxl_t_mu": {
+		"information":{
+			"authors":"fillman86",
+			"name":"Turbo System XXXL (153psi)",
+			"value":1000000
+		},
+
+		"slotType" : "pigeon_i3_intake_t_mu"
+
+		"slots": [
+			["type", "default", "description"],
+			["pigeon_intake_pipe_xxxl_t_mu","pigeon_intake_pipe_xxxl_t_mu", "Intake Pipe"]
+			["pigeon_stabilizer_turbo","pigeon_stabilizer_turbo", "Turbo Bracket"]
+		],
+
+		"camerasInternal":[
+			["type", "x", "y", "z", "fov", "id1:", "id2:", "id3:", "id4:", "id5:", "id6:"],
+			{"nodeWeight":1.5},
+			{"rightHandCamera":true},
+			{"beamSpring":8000, "beamDamp":100},
+			{"selfCollision":true},
+			{"collision":true},
+			//turbo cam
+			["turbo", -0.4, -0.7, 1.02, 60, "turbo1r","turbo1l","turbo2r","turbo2l","turbo3r","turbo3l", {"beamDeform":5001000,"beamStrength":"FLT_MAX"}],
+		],
+
+		"turbocharger": {
+			"bovEnabled":false,
+			"hissLoopEvent":"event:>Vehicle>Forced_Induction>Turbo_semi_01>turbo_hiss_race",
+			"whineLoopEvent":"event:>Vehicle>Forced_Induction>Turbo_semi_01>turbo_spin_race",
+			"turboSizeCoef": 1,
+			"bovSoundVolumeCoef": 10.5,
+			"hissVolumePerPSI": 10,
+			"whineVolumePer10kRPM": 1.8,
+			"whinePitchPer10kRPM": 0.04,
+			"wastegateStart":153.1,
+			"wastegateLimit":153.5,
+			"maxExhaustPower": 3000,//lower numbers is more turbo lag
+			"backPressureCoef": 0.000011,
+			"pressureRatePSI": 60,
+			"frictionCoef": 25.0,
+			"inertia":26.50,
+			"damageThresholdTemperature": 900,
+			"pressurePSI":[
+				//turbineRPM, pressure(PSI)
+				[0,       -3.5],
+				[30000,    20],
+				[60000,      50],
+				[90000,     145],
+				[150000,    151],
+				[200000,    160],
+				[250000,    165],
+				[300000,    168]
+			],
+
+			"engineDef":[
+				//engineRPM, efficiency, exhaustFactor
+				[0,       0.0,		0.0],
+				[650,   	0.0,		0.0],
+				[1400,  	0.1,		0.01],
+				[2000,  	0.1,		0.01],
+				[2500,  	0.1,		0.05],
+				[3000,  	0.1,		0.06],
+				[4300,  	0.1,		0.07],
+				[5000,  	0.1,  		0.08],
+				[6000,  	0.102,		0.09],
+				[8000,  	0.105,		0.1],
+				[12000,  	0.11,		0.11],
+				[16000,  	0.7,		0.13],
+				[18000,  	0.9,		0.3],
+				[21000,  	3,		1],
+				[25000,  	5,		1.5],
+				[28000,  	4.5,		1.3]
+			]
+		},
+
+		"mainEngine": {
+			//turbocharger name
+			"turbocharger":"turbocharger",
+			"$+particulates":0.25,
+			//turbocharger deform groups
+			"deformGroups_turbo":["mainEngine_turbo","mainEngine_piping"]
+		},
+	
+		"controller": [
+			["fileName"],
+			["turboGlow", {"turboStartGlow":300,"turboGlowTemp":350,"tempEndGlow":2100,"turboGlowValue":[1,2,3], "maxGlow":0.2}]
+		],
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["pigeon_na_header_t_mu", ["pigeon_engine","pigeon_t_mu"]]
+			["pigeon_carb_l_t_mu", ["pigeon_manifold","pigeon_t_mu"]],
+
+			["pigeon_turbo_xxxl_t_mu", "pigeon_t_mu"]
+
+		],
+
+		"variables": [
+			["name", "type",		"unit",	"category", "default", "min", "max", "title", "description"],
+			["$fake_weight", "range", "X", "Engine",			1,		0.05,	2.0, "Turbo Weight", "Multiply the Weight"]
+		],
+
+		"nodes": [
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true},
+			{"collision":true},
+			{"nodeMaterial":"|NM_METAL"},
+			{"frictionCoef":0.5},
+			//exhaust attach
+			{"group":"pigeon_manifold"},
+			//exhaust attach
+			{"nodeWeight":2.5},
+			["exm1l", 0.15, -0.48, 0.31],
+
+			{"nodeWeight":"$=$fake_weight*40"},
+			//turbo
+			{"group":"pigeon_t_mu"},
+			["turbo1r", -1.0513, 2.787, 0.683],
+			["turbo1l",  0.4598, 2.7613, 0.683],
+	
+			["turbo3r", -1.0650, 2.7839, 1.7364],
+			["turbo3l",  1.6063, 2.7231, 1.5766],
+
+			{"nodeWeight":"$=$fake_weight*12"},
+			["turbo2r", -1.0513, 0.6859, 0.683],
+			["turbo2l",  0.7268, 0.6859, 0.683],
+	
+	
+			["turbo4r", -1.0513, 0.6859, 2.1455],
+			["turbo4l",  1.6063, 1.4415, 1.5766],
+
+        	["turbo6r", -0.0258, 2.7296, 2.2759],
+        	["turbo6l", 0.8744, 2.7061, 2.1119],
+        	["turbo5r", 0.3011, 0.7263, 2.4758],
+        	["turbo5l", 0.8744, 0.7548, 2.1119],
+        	["turboexh", -0.0008, 1.4357, 1.3033],
+
+			{"engineGroup":"engine_intake"},
+        	["turboin", -0.0008, 0.394, 1.3033],
+			{"engineGroup":""},
+
+			{"group":""}
+		],
+
+		"props": [
+			["func",		"mesh",				"idRef:",	"idX:", "idY:", "baseRotation", "rotation", "translation", "min", "max", "offset", "multiplier"],
+			["turboSpin",	"pigeon_imp_xxxl_t_mu","turbo2r",	"turbo2l",	"turbo1r", {"x":90, "y":0, "z":0}, {"x":0, "y":-1, "z":0}, {"x":0, "y":0, "z":0}, 0,360,0,1],
+		],
+		
+		"beams": [
+			["id1:", "id2:"],
+			{"beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			//turbo attach
+			{"beamSpring":1801000,"beamDamp":150},
+			{"beamDeform":10000,"beamStrength":12100},
+			{"deformGroup":["mainEngine_turbo","mainEngine_intake"], "deformationTriggerRatio":0.001}
+			{"breakGroup":"pigeon_turbo_t_mu"},
+			["turbo1r","e4l"],
+			["turbo1r","e3l"],
+			["turbo1r","e2l"],
+			["turbo1r","e1l"],
+	
+			["turbo1l","e4l"],
+			["turbo1l","e3l"],
+			["turbo1l","e2l"],
+			["turbo1l","e1l"],
+	
+			["turbo2r","e4l"],
+			["turbo2r","e3l"],
+			["turbo2r","e2l"],
+			["turbo2r","e1l"],
+	
+			["turbo2l","e4l"],
+			["turbo2l","e3l"],
+			["turbo2l","e2l"],
+			["turbo2l","e1l"],
+	
+			["turbo3r","e4l"],
+			["turbo3r","e3l"],
+			["turbo3r","e2l"],
+			["turbo3r","e1l"],
+	
+			["turbo3l","e4l"],
+			["turbo3l","e3l"],
+			["turbo3l","e2l"],
+			["turbo3l","e1l"],
+	
+			["turbo4r","e4l"],
+			["turbo4r","e3l"],
+			["turbo4r","e2l"],
+			["turbo4r","e1l"],
+	
+			["turbo4l","e4l"],
+			["turbo4l","e3l"],
+			["turbo4l","e2l"],
+			["turbo4l","e1l"],
+	
+			["turbo1r","e4r"],
+			["turbo1r","e2r"],
+			["turbo2r","e4r"],
+			["turbo2r","e2r"],
+	
+			//["turboin","e4l", {"isExhaust":"mainEngine"}],
+
+			//turbo structure
+			{"beamSpring":2801000,"beamDamp":200},
+			{"beamDeform":35000,"beamStrength":"FLT_MAX"},
+			{"breakGroup":""},
+			["turbo3l","turboin",	{"isExhaust":"mainEngine"}],
+			["turboin","turboexh",	{"isExhaust":"mainEngine"}],
+
+			["turbo3r","turbo4r"],
+			["turbo2r","turbo4l"],
+			["turbo3l","turbo4l"],
+			["turbo2r","turbo4r"],
+			["turbo3l","turbo4r"],
+			["turbo1r","turbo4l"],
+			["turbo1r","turbo2l"],
+			["turbo1l","turbo2l"],
+			["turbo2r","turbo3r"],
+			["turbo1l","turbo4l"],
+			["turbo2l","turbo4l"],
+			["turbo3l","turbo3r"],
+			["turbo1l","turbo2r"],
+			["turbo1r","turbo2r"],
+			["turbo2l","turbo2r"],
+			["turbo1r","turbo4r"],
+			["turbo1l","turbo4r"],
+			["turbo2l","turbo4r"],
+			["turbo1r","turbo3r"],
+			["turbo1l","turbo3r"],
+			["turbo2l","turbo3r"],
+			["turbo2r","turbo3l"],
+			["turbo1l","turbo3l"],
+			["turbo1l","turbo1r"],
+			["turbo3r","turbo4l"],
+			["turbo4l","turbo4r"],
+			["turbo1r","turbo3l"],
+			["turbo2l","turbo3l"],
+			
+        	["turbo5l","turbo6r"],
+        	["turbo5r","turbo6r"],
+        	["turbo6l","turbo6r"],
+        	["turbo5r","turbo6l"],
+        	["turbo5r","turbo4r"],
+        	["turbo6r","turbo3r"],
+        	["turbo5r","turbo5l"],
+        	["turbo5l","turbo4l"],
+        	["turbo6l","turbo3l"],
+        	["turbo6l","turbo5l"],
+        	["turboexh","turbo6l"],
+        	["turboin","turbo5l"],
+        	["turbo6r","turbo4r"],
+        	["turboin","turbo1l"],
+        	["turboin","turbo2l"],
+        	["turbo5r","turbo4l"],
+        	["turbo6l","turbo1r"],
+        	["turbo5l","turbo2r"],
+        	["turboin","turbo3r"],
+        	["turbo5l","turbo4r"],
+        	["turboexh","turbo6r"],
+        	["turbo5l","turbo3l"],
+        	["turboexh","turbo2r"],
+        	["turboin","turbo4l"],
+        	["turboexh","turbo4r"],
+        	["turbo5r","turboin"],
+        	["turbo6r","turbo2l"],
+        	["turbo5r","turbo1r"],
+        	["turboexh","turbo3l"],
+        	["turbo6r","turbo1l"],
+        	["turboexh","turbo5l"],
+        	["turbo6l","turbo2r"],
+        	["turbo6l","turbo4r"],
+        	["turbo5r","turboexh"],
+        	["turboin","turbo1r"],
+        	["turbo5l","turbo1l"],
+        	["turbo5l","turbo2l"],
+        	["turboin","turbo6l"],
+        	["turbo5r","turbo2r"],
+        	["turbo6r","turbo4l"],
+        	["turboexh","turbo1l"],
+        	["turboexh","turbo2l"],
+        	["turbo5l","turbo3r"],
+        	["turboin","turbo6r"],
+        	["turboexh","turbo3r"],
+        	["turbo5r","turbo3l"],
+        	["turboin","turbo2r"],
+        	["turbo6r","turbo1r"],
+        	["turbo6l","turbo1l"],
+        	["turboin","turbo4r"],
+        	["turbo6l","turbo2l"],
+        	["turboexh","turbo4l"],
+        	["turboin","turbo3l"],
+        	["turbo6l","turbo3r"],
+        	["turbo5l","turbo1r"],
+        	["turboexh","turbo1r"],
+        	["turbo5r","turbo1l"],
+        	["turbo5r","turbo2l"],
+        	["turbo6l","turbo4l"],
+        	["turbo6r","turbo2r"],
+        	["turbo5r","turbo3r"],
+        	["turbo6r","turbo3l"],
+
+			{"breakGroup":""},
+			//exhaust attach
+			{"beamSpring":501000,"beamDamp":100},
+			{"beamDeform":9000,"beamStrength":15100},
+			{"deformGroup":"", "deformationTriggerRatio":""}
+			["e4l","exm1l", {"isExhaust":"mainEngine"}],
+			{"breakGroup":""},
+			//["exm1l","e4l"],
+			["exm1l","e3l"],
+			["exm1l", "e1l"],
+			["exm1l", "e2l"],
+	
+			{"deformGroup":"", "deformationTriggerRatio":""},
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0}
+		],
+		
+		"triangles": [
+			["id1:","id2:","id3:"],
+            {"dragCoef":10},
+        	["turbo5l","turboin","turbo4l"],
+        	["turbo5l","turbo5r","turboin"],
+        	["turbo4r","turboin","turbo5r"],
+        	["turbo2r","turboin","turbo4r"],
+        	["turbo2l","turboin","turbo2r"],
+        	["turbo2l","turbo4l","turboin"],
+
+            {"dragCoef":1},
+        	["turbo3l","turbo5l","turbo4l"],
+        	["turbo3l","turbo6l","turbo5l"],
+        	["turbo5l","turbo6l","turbo6r"],
+        	["turbo5l","turbo6r","turbo5r"],
+        	["turbo3r","turbo2r","turbo4r"],
+        	["turbo5r","turbo6r","turbo4r"],
+        	["turbo4r","turbo6r","turbo3r"],
+
+			["turbo6l","turbo3l","turboexh"],
+			["turbo3l","turboexh","turbo1l"],
+			["turbo1r","turbo1l","turboexh"],
+			["turbo3r","turboexh","turbo1r"],
+			["turbo6r","turbo3r","turboexh"],
+			["turbo6r","turbo6l","turboexh"],
+			["turbo3l","turbo1l","turbo4l"],
+			["turbo2l","turbo4l","turbo1l"],
+			{"dragCoef":1},
+		]
+	},
+
+	"pigeon_i3_internals_heavy_t_mu": {
+		"information":{
+			"authors":"fillman86",
+			"name":"Heavy Duty Turbo Long Block",
+			"value":500
+		},
+
+		"slotType" : "pigeon_i3_internals"
+
+		"mainEngine":{
+			/* "torqueModMult":[
+				["rpm", "torque"],
+				[0,    1],
+				[1000, 0.95],
+				[2000, 0.96],
+				[3000, 0.97],
+				[4000, 1.01],
+				[5000, 1.08],
+				[6000, 1.19],
+				[7000, 1.4],
+				[8000, 2.345],
+				[9000, 4.69],
+				//[9100, 10],
+				[30000, 53],
+			], */
+			"$+maxRPM":12250,
+			"$*friction":1.2,
+			"$*dynamicFriction":1.2,
+			"$*inertia":1.5,
+			"$*engineBrakeTorque":1.1,
+			//engine durability
+			"cylinderWallTemperatureDamageThreshold":175,
+			"headGasketDamageThreshold":1700000,
+			"pistonRingDamageThreshold":1700000,
+			"connectingRodDamageThreshold":2200000,
+			//"maxTorqueRating": 330,
+			//"maxOverTorqueDamage": 250,
+			"$*maxTorqueRating": 2.54,
+			"$*maxOverTorqueDamage": 1.5
+		}
+	},
+
+	"pigeon_i3_internals_super_t_mu": {
+		"information":{
+			"authors":"fillman86",
+			"name":"Heavy Duty Turbo Long Block (but even better)",
+			"value":500
+		},
+
+		"slotType" : "pigeon_i3_internals"
+
+		"mainEngine":{
+			/* "torqueModMult":[
+				["rpm", "torque"],
+				[0,    1],
+				[1000, 0.95],
+				[2000, 0.96],
+				[3000, 0.97],
+				[4000, 1.01],
+				[5000, 1.08],
+				[6000, 1.19],
+				[7000, 1.4],
+				[8000, 2.345],
+				[9000, 4.69],
+				//[9100, 10],
+				[30000, 53],
+			], */
+			"$+maxRPM":12250,
+			"$*friction":1.2,
+			"$*dynamicFriction":1.2,
+			"$*inertia":1.5,
+			"$*engineBrakeTorque":1.1,
+			//engine durability
+			"cylinderWallTemperatureDamageThreshold":175,
+			"headGasketDamageThreshold":1700000,
+			"pistonRingDamageThreshold":1700000,
+			"connectingRodDamageThreshold":2200000,
+			//"maxTorqueRating": 330,
+			//"maxOverTorqueDamage": 250,
+			"$*maxTorqueRating": 4.54,
+			"$*maxOverTorqueDamage": 2
+		}
+	},
+
+	"pigeon_i3_internals_super2_t_mu": {
+		"information":{
+			"authors":"fillman86",
+			"name":"Heavy Duty Turbo Long Block (This is just cheating)",
+			"value":500
+		},
+
+		"slotType" : "pigeon_i3_internals"
+
+		"mainEngine":{
+			"$+maxRPM":12250,
+			"$*friction":1.2,
+			"$*dynamicFriction":1.2,
+			"$*inertia":2.5,
+			"$*engineBrakeTorque":1.1,
+			//engine durability
+			"cylinderWallTemperatureDamageThreshold":200,
+			"headGasketDamageThreshold":1700000,
+			"pistonRingDamageThreshold":1700000,
+			"connectingRodDamageThreshold":2200000,
+			//"maxTorqueRating": 330,
+			//"maxOverTorqueDamage": 250,
+			"$*maxTorqueRating": 8.54,
+			"$*maxOverTorqueDamage": 4
+		}
+	},
+
+	"pigeon_i3_ecu_super": {
+		"information":{
+			"authors":"BeamNG",
+			"name":"Adjustable Super Rev Limiter",
+			"value":9450,
+		},
+		"slotType" : "pigeon_i3_ecu",
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
+			["$revLimiterRPM", "range", "rpm", "Engine", 8250, 6000, 27500, "RPM Limit", "RPM where the rev limiter prevents further revving", {"stepDis":50}],
+			["$revLimiterCutTime", "range", "s", "Engine", 0.15, 0.01, 0.5, "RPM Limit Cut Time", "How fast the rev limiter cycles", {"stepDis":0.01}]
+			["$twostep", "range", "rpm", "Engine", 6000, 4000, 27000, "Lunch Control", "RPM target for fast takeoff", {"stepDis":0.01}]
+		],
+
+		"controller": [
+			["fileName"],
+			["twoStepLaunch", {"rpmLimit":4000}]
+		],
+
+		"mainEngine":{
+			"hasRevLimiter":true,
+			"revLimiterType":"timeBased",
+			"revLimiterRPM":"$revLimiterRPM",
+			"revLimiterCutTime":"$revLimiterCutTime"
+		},
+
+		"vehicleController": {
+			"highShiftUpRPM":"$=$revLimiterRPM - 200",
+		}
+	}
+}

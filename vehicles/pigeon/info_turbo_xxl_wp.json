@@ -1,0 +1,21 @@
+{
+	"BoundingBox": [[-0.36,-1.261,-0.2033],[1.08,2.012,1.27]],
+	"Config Type": "Custom",
+	"Configuration": "Turbo XXL (Strong Engine)",
+	"Description": "You must be a glutton for punishment. This one has reinforced internals, externals, and everything else.",
+	"Drivetrain": "RWD",
+	"Fuel Type": "Petrol",
+	"Induction Type": "NA",
+	"Off-Road Score": 34,
+	"Population": 1,
+	"Power": 1890,
+	"PowerPeakRPM": "19500 - 20000",
+	"Propulsion": "ICE",
+	"Torque": 1388,
+	"TorquePeakRPM": "19500 - 20000",
+	"Transmission": "Manual",
+	"Value": 120007,
+	"Weight": 770,
+	"default_color": "Sunset Purple",
+	"default_color_2": "Midnight Pearl"
+}

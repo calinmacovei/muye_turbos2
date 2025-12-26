@@ -1,0 +1,21 @@
+{
+	"BoundingBox": [[-0.36,-1.261,-0.2033],[1.08,2.012,1.27]],
+	"Config Type": "Custom",
+	"Configuration": "Turbo XL (M)",
+	"Description": "Don't pick this one, it's not worth it man.",
+	"Drivetrain": "RWD",
+	"Fuel Type": "Petrol",
+	"Induction Type": "NA",
+	"Off-Road Score": 34,
+	"Population": 1,
+	"Power": 930,
+	"PowerPeakRPM": "12200 - 13500",
+	"Propulsion": "ICE",
+	"Torque": 683,
+	"TorquePeakRPM": "13400 - 13500",
+	"Transmission": "Manual",
+	"Value": 120005,
+	"Weight": 611,
+	"default_color": "Sunset Purple",
+	"default_color_2": "Midnight Pearl"
+}
